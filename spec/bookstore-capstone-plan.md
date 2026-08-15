@@ -642,7 +642,7 @@ Build the cart page where users review selected items, adjust quantities, remove
 - `src/app/features/cart/`
 - `cart.store.ts` — items, itemCount, totalPrice
 
-**Status** — `[ ] pending`
+**Status** — `[x] completed`
 
 ---
 
