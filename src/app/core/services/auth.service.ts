@@ -50,6 +50,12 @@ export class AuthService {
     return !!this.getToken();
   }
 
+  updateProfile(userId: string, patch: { name: string; email: string }): Observable<User> {
+    return this.http.patch<User>(`${this.baseUrl}/users/${userId}`, patch).pipe(
+      tap(user => localStorage.setItem('user', JSON.stringify(user)))
+    );
+  }
+
   private setSession(authResult: { user: User; token: string }): void {
     localStorage.setItem('token', authResult.token);
     localStorage.setItem('userId', authResult.user.id);

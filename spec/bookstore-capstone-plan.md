@@ -707,7 +707,7 @@ Implement the user account area: profile page, full order history list with stat
 - `order.store.ts` — orders, selectedOrder, cancelOrder, loadOrders
 - 48 h cancel window: `(Date.now() - order.placedAt.getTime()) < 48 * 60 * 60 * 1000`
 
-**Status** — `[ ] pending`
+**Status** — `[x] completed`
 
 ---
 
