@@ -350,7 +350,7 @@ Bootstrap the Angular 18+ project with all tooling configured: Tailwind CSS, NgR
 
 ---
 
-### Sub-Task 2 — Core Models & Mock Database
+### Sub-Task 2 — Core Models & Mock Database ✅
 
 **Intent**  
 Define all TypeScript interfaces and populate `db.json` with realistic seed data so every page has data to display from day one. No data shape changes should be needed after this sub-task.
@@ -373,7 +373,7 @@ Define all TypeScript interfaces and populate `db.json` with realistic seed data
 - `db.json` at project root
 - `OrderStatus` union type must align with cancel-within-48h business rule
 
-**Status** — `[ ] pending`
+**Status** — `[x] completed`
 
 ---
 

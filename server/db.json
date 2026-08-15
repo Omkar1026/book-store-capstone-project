@@ -1,13 +1,1777 @@
 {
-  "users": [],
-  "books": [],
-  "categories": [],
-  "publishers": [],
-  "carts": [],
-  "orders": [],
-  "addresses": [],
-  "recommendations": [],
-  "reviews": [],
-  "giftPointsBalances": [],
-  "paymentMethods": []
+  "users": [
+    {
+      "id": "user-001",
+      "email": "demo@bookstore.com",
+      "password": "password123",
+      "name": "Alex Johnson",
+      "addresses": [
+        "addr-001",
+        "addr-002",
+        "addr-003"
+      ],
+      "giftPointsBalance": 350,
+      "orderHistory": [
+        "order-001",
+        "order-002",
+        "order-003",
+        "order-004",
+        "order-005",
+        "order-006",
+        "order-007",
+        "order-011",
+        "order-012"
+      ],
+      "createdAt": "2023-06-01T00:00:00Z"
+    },
+    {
+      "id": "user-002",
+      "email": "sam@bookstore.com",
+      "password": "password123",
+      "name": "Sam Rivera",
+      "addresses": [
+        "addr-004",
+        "addr-005"
+      ],
+      "giftPointsBalance": 75,
+      "orderHistory": [
+        "order-008",
+        "order-009",
+        "order-010"
+      ],
+      "createdAt": "2023-09-14T00:00:00Z"
+    }
+  ],
+  "books": [
+    {
+      "id": "book-001",
+      "title": "The Midnight Library",
+      "author": "Matt Haig",
+      "publisherId": "pub-001",
+      "categoryId": "cat-001",
+      "price": 14.99,
+      "stock": 32,
+      "imageUrl": "https://placehold.co/200x300/3b82f6/fff?text=Book",
+      "rating": 4.6,
+      "reviewCount": 1820,
+      "description": "A dazzling novel about all the lives you could have lived.",
+      "isbn": "978-0-525-55947-4",
+      "publishedDate": "2020-09-29",
+      "tags": [
+        "contemporary",
+        "magical realism",
+        "bestseller"
+      ]
+    },
+    {
+      "id": "book-002",
+      "title": "Klara and the Sun",
+      "author": "Kazuo Ishiguro",
+      "publisherId": "pub-001",
+      "categoryId": "cat-001",
+      "price": 15.99,
+      "stock": 18,
+      "imageUrl": "https://placehold.co/200x300/6366f1/fff?text=Book",
+      "rating": 4.3,
+      "reviewCount": 942,
+      "description": "A story told from the perspective of Klara, an Artificial Friend.",
+      "isbn": "978-0-593-31817-1",
+      "publishedDate": "2021-03-02",
+      "tags": [
+        "literary",
+        "sci-fi",
+        "booker"
+      ]
+    },
+    {
+      "id": "book-003",
+      "title": "The House in the Cerulean Sea",
+      "author": "TJ Klune",
+      "publisherId": "pub-003",
+      "categoryId": "cat-001",
+      "price": 13.99,
+      "stock": 45,
+      "imageUrl": "https://placehold.co/200x300/10b981/fff?text=Book",
+      "rating": 4.8,
+      "reviewCount": 3104,
+      "description": "A magical story about a caseworker for magical beings.",
+      "isbn": "978-1-250-21728-1",
+      "publishedDate": "2020-03-17",
+      "tags": [
+        "fantasy",
+        "cozy",
+        "lgbtq"
+      ]
+    },
+    {
+      "id": "book-004",
+      "title": "Project Hail Mary",
+      "author": "Andy Weir",
+      "publisherId": "pub-001",
+      "categoryId": "cat-001",
+      "price": 16.99,
+      "stock": 27,
+      "imageUrl": "https://placehold.co/200x300/f59e0b/fff?text=Book",
+      "rating": 4.9,
+      "reviewCount": 4520,
+      "description": "A lone astronaut must save the earth from disaster.",
+      "isbn": "978-0-593-13520-4",
+      "publishedDate": "2021-05-04",
+      "tags": [
+        "sci-fi",
+        "adventure",
+        "bestseller"
+      ]
+    },
+    {
+      "id": "book-005",
+      "title": "The Seven Husbands of Evelyn Hugo",
+      "author": "Taylor Jenkins Reid",
+      "publisherId": "pub-004",
+      "categoryId": "cat-001",
+      "price": 12.99,
+      "stock": 60,
+      "imageUrl": "https://placehold.co/200x300/ec4899/fff?text=Book",
+      "rating": 4.7,
+      "reviewCount": 5881,
+      "description": "The epic life story of Hollywood icon Evelyn Hugo.",
+      "isbn": "978-1-501-16134-9",
+      "publishedDate": "2017-06-13",
+      "tags": [
+        "historical fiction",
+        "romance",
+        "lgbtq"
+      ]
+    },
+    {
+      "id": "book-006",
+      "title": "Piranesi",
+      "author": "Susanna Clarke",
+      "publisherId": "pub-002",
+      "categoryId": "cat-001",
+      "price": 13.49,
+      "stock": 22,
+      "imageUrl": "https://placehold.co/200x300/8b5cf6/fff?text=Book",
+      "rating": 4.5,
+      "reviewCount": 1340,
+      "description": "A mystery set in a surreal labyrinthine House with infinite halls.",
+      "isbn": "978-1-635-57575-5",
+      "publishedDate": "2020-09-15",
+      "tags": [
+        "fantasy",
+        "mystery",
+        "award-winner"
+      ]
+    },
+    {
+      "id": "book-007",
+      "title": "Lessons in Chemistry",
+      "author": "Bonnie Garmus",
+      "publisherId": "pub-005",
+      "categoryId": "cat-001",
+      "price": 14.49,
+      "stock": 38,
+      "imageUrl": "https://placehold.co/200x300/ef4444/fff?text=Book",
+      "rating": 4.6,
+      "reviewCount": 2915,
+      "description": "Set in early 1960s, a female chemist becomes an unlikely cooking show host.",
+      "isbn": "978-0-385-54734-8",
+      "publishedDate": "2022-04-05",
+      "tags": [
+        "historical fiction",
+        "humor",
+        "feminist"
+      ]
+    },
+    {
+      "id": "book-008",
+      "title": "Circe",
+      "author": "Madeline Miller",
+      "publisherId": "pub-005",
+      "categoryId": "cat-001",
+      "price": 13.99,
+      "stock": 29,
+      "imageUrl": "https://placehold.co/200x300/0ea5e9/fff?text=Book",
+      "rating": 4.7,
+      "reviewCount": 3667,
+      "description": "A retelling of the myth of Circe, the witch of the Odyssey.",
+      "isbn": "978-0-316-55634-7",
+      "publishedDate": "2018-04-10",
+      "tags": [
+        "mythology",
+        "fantasy",
+        "bestseller"
+      ]
+    },
+    {
+      "id": "book-009",
+      "title": "Normal People",
+      "author": "Sally Rooney",
+      "publisherId": "pub-007",
+      "categoryId": "cat-001",
+      "price": 11.99,
+      "stock": 41,
+      "imageUrl": "https://placehold.co/200x300/64748b/fff?text=Book",
+      "rating": 4.1,
+      "reviewCount": 2201,
+      "description": "A love story between two Irish students as they navigate early adulthood.",
+      "isbn": "978-0-571-33489-1",
+      "publishedDate": "2018-08-30",
+      "tags": [
+        "literary",
+        "romance",
+        "irish"
+      ]
+    },
+    {
+      "id": "book-010",
+      "title": "The Poppy War",
+      "author": "R.F. Kuang",
+      "publisherId": "pub-002",
+      "categoryId": "cat-001",
+      "price": 13.99,
+      "stock": 15,
+      "imageUrl": "https://placehold.co/200x300/a3e635/000?text=Book",
+      "rating": 4.4,
+      "reviewCount": 1590,
+      "description": "A dark epic fantasy inspired by Chinese history.",
+      "isbn": "978-0-062-66246-1",
+      "publishedDate": "2018-05-01",
+      "tags": [
+        "epic fantasy",
+        "dark",
+        "war"
+      ]
+    },
+    {
+      "id": "book-011",
+      "title": "Sapiens: A Brief History of Humankind",
+      "author": "Yuval Noah Harari",
+      "publisherId": "pub-002",
+      "categoryId": "cat-002",
+      "price": 16.99,
+      "stock": 55,
+      "imageUrl": "https://placehold.co/200x300/f97316/fff?text=Book",
+      "rating": 4.7,
+      "reviewCount": 6120,
+      "description": "A sweeping narrative of the entire history of our species.",
+      "isbn": "978-0-062-31609-7",
+      "publishedDate": "2015-02-10",
+      "tags": [
+        "history",
+        "anthropology",
+        "bestseller"
+      ]
+    },
+    {
+      "id": "book-012",
+      "title": "Educated",
+      "author": "Tara Westover",
+      "publisherId": "pub-001",
+      "categoryId": "cat-002",
+      "price": 14.99,
+      "stock": 43,
+      "imageUrl": "https://placehold.co/200x300/dc2626/fff?text=Book",
+      "rating": 4.8,
+      "reviewCount": 4802,
+      "description": "A memoir of a woman who grew up in a strict survivalist family.",
+      "isbn": "978-0-399-59050-4",
+      "publishedDate": "2018-02-20",
+      "tags": [
+        "memoir",
+        "education",
+        "bestseller"
+      ]
+    },
+    {
+      "id": "book-013",
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "publisherId": "pub-005",
+      "categoryId": "cat-002",
+      "price": 15.99,
+      "stock": 70,
+      "imageUrl": "https://placehold.co/200x300/16a34a/fff?text=Book",
+      "rating": 4.8,
+      "reviewCount": 8910,
+      "description": "An easy and proven way to build good habits and break bad ones.",
+      "isbn": "978-0-735-21129-2",
+      "publishedDate": "2018-10-16",
+      "tags": [
+        "self-help",
+        "productivity",
+        "bestseller"
+      ]
+    },
+    {
+      "id": "book-014",
+      "title": "The Immortal Life of Henrietta Lacks",
+      "author": "Rebecca Skloot",
+      "publisherId": "pub-002",
+      "categoryId": "cat-002",
+      "price": 13.49,
+      "stock": 24,
+      "imageUrl": "https://placehold.co/200x300/7c3aed/fff?text=Book",
+      "rating": 4.6,
+      "reviewCount": 2340,
+      "description": "The true story of a woman whose cancer cells changed medicine.",
+      "isbn": "978-1-400-05217-2",
+      "publishedDate": "2010-02-02",
+      "tags": [
+        "science",
+        "ethics",
+        "biography"
+      ]
+    },
+    {
+      "id": "book-015",
+      "title": "Thinking, Fast and Slow",
+      "author": "Daniel Kahneman",
+      "publisherId": "pub-001",
+      "categoryId": "cat-002",
+      "price": 14.99,
+      "stock": 33,
+      "imageUrl": "https://placehold.co/200x300/be123c/fff?text=Book",
+      "rating": 4.5,
+      "reviewCount": 3502,
+      "description": "Explores two systems of thinking that drive the way we think.",
+      "isbn": "978-0-374-27563-1",
+      "publishedDate": "2011-10-25",
+      "tags": [
+        "psychology",
+        "economics",
+        "bestseller"
+      ]
+    },
+    {
+      "id": "book-016",
+      "title": "Becoming",
+      "author": "Michelle Obama",
+      "publisherId": "pub-002",
+      "categoryId": "cat-002",
+      "price": 17.99,
+      "stock": 50,
+      "imageUrl": "https://placehold.co/200x300/0284c7/fff?text=Book",
+      "rating": 4.9,
+      "reviewCount": 7630,
+      "description": "An intimate, powerful memoir by the former First Lady.",
+      "isbn": "978-1-524-76313-8",
+      "publishedDate": "2018-11-13",
+      "tags": [
+        "memoir",
+        "politics",
+        "inspiration"
+      ]
+    },
+    {
+      "id": "book-017",
+      "title": "The Body: A Guide for Occupants",
+      "author": "Bill Bryson",
+      "publisherId": "pub-001",
+      "categoryId": "cat-002",
+      "price": 14.49,
+      "stock": 28,
+      "imageUrl": "https://placehold.co/200x300/65a30d/fff?text=Book",
+      "rating": 4.6,
+      "reviewCount": 1875,
+      "description": "A remarkable tour of your own body from a master of science writing.",
+      "isbn": "978-0-385-53957-2",
+      "publishedDate": "2019-10-15",
+      "tags": [
+        "science",
+        "health",
+        "humor"
+      ]
+    },
+    {
+      "id": "book-018",
+      "title": "The Year of Magical Thinking",
+      "author": "Joan Didion",
+      "publisherId": "pub-001",
+      "categoryId": "cat-002",
+      "price": 12.99,
+      "stock": 17,
+      "imageUrl": "https://placehold.co/200x300/b45309/fff?text=Book",
+      "rating": 4.4,
+      "reviewCount": 1102,
+      "description": "A classic memoir about grief, loss, and the strangeness of the mind.",
+      "isbn": "978-1-400-07823-3",
+      "publishedDate": "2005-10-04",
+      "tags": [
+        "memoir",
+        "grief",
+        "classic"
+      ]
+    },
+    {
+      "id": "book-019",
+      "title": "A Brief History of Time",
+      "author": "Stephen Hawking",
+      "publisherId": "pub-001",
+      "categoryId": "cat-003",
+      "price": 13.99,
+      "stock": 48,
+      "imageUrl": "https://placehold.co/200x300/1d4ed8/fff?text=Book",
+      "rating": 4.6,
+      "reviewCount": 5430,
+      "description": "An exploration of the cosmos from the Big Bang to black holes.",
+      "isbn": "978-0-553-38016-3",
+      "publishedDate": "1988-04-01",
+      "tags": [
+        "physics",
+        "cosmology",
+        "classic"
+      ]
+    },
+    {
+      "id": "book-020",
+      "title": "The Selfish Gene",
+      "author": "Richard Dawkins",
+      "publisherId": "pub-006",
+      "categoryId": "cat-003",
+      "price": 13.49,
+      "stock": 21,
+      "imageUrl": "https://placehold.co/200x300/059669/fff?text=Book",
+      "rating": 4.5,
+      "reviewCount": 2109,
+      "description": "A brilliant exposition of evolutionary theory from the gene's point of view.",
+      "isbn": "978-0-199-29115-2",
+      "publishedDate": "1976-11-25",
+      "tags": [
+        "biology",
+        "evolution",
+        "classic"
+      ]
+    },
+    {
+      "id": "book-021",
+      "title": "The Code Breaker",
+      "author": "Walter Isaacson",
+      "publisherId": "pub-004",
+      "categoryId": "cat-003",
+      "price": 17.49,
+      "stock": 19,
+      "imageUrl": "https://placehold.co/200x300/9333ea/fff?text=Book",
+      "rating": 4.4,
+      "reviewCount": 780,
+      "description": "The story of Jennifer Doudna, gene editing, and the future of the human race.",
+      "isbn": "978-1-982-11585-2",
+      "publishedDate": "2021-03-09",
+      "tags": [
+        "genetics",
+        "crispr",
+        "biography"
+      ]
+    },
+    {
+      "id": "book-022",
+      "title": "The Gene: An Intimate History",
+      "author": "Siddhartha Mukherjee",
+      "publisherId": "pub-004",
+      "categoryId": "cat-003",
+      "price": 15.99,
+      "stock": 14,
+      "imageUrl": "https://placehold.co/200x300/ea580c/fff?text=Book",
+      "rating": 4.5,
+      "reviewCount": 1023,
+      "description": "An intimate history of the gene from Mendel to the age of genetic therapy.",
+      "isbn": "978-1-476-73325-5",
+      "publishedDate": "2016-05-17",
+      "tags": [
+        "genetics",
+        "history",
+        "award-winner"
+      ]
+    },
+    {
+      "id": "book-023",
+      "title": "Cosmos",
+      "author": "Carl Sagan",
+      "publisherId": "pub-001",
+      "categoryId": "cat-003",
+      "price": 14.99,
+      "stock": 35,
+      "imageUrl": "https://placehold.co/200x300/f43f5e/fff?text=Book",
+      "rating": 4.8,
+      "reviewCount": 4215,
+      "description": "An unforgettable voyage through space and time by the beloved astronomer.",
+      "isbn": "978-0-345-33135-9",
+      "publishedDate": "1980-10-12",
+      "tags": [
+        "astronomy",
+        "cosmology",
+        "classic"
+      ]
+    },
+    {
+      "id": "book-024",
+      "title": "The Hidden Life of Trees",
+      "author": "Peter Wohlleben",
+      "publisherId": "pub-002",
+      "categoryId": "cat-003",
+      "price": 13.99,
+      "stock": 26,
+      "imageUrl": "https://placehold.co/200x300/4ade80/000?text=Book",
+      "rating": 4.5,
+      "reviewCount": 1540,
+      "description": "How trees communicate and support each other in a forest ecosystem.",
+      "isbn": "978-1-771-64248-4",
+      "publishedDate": "2015-05-01",
+      "tags": [
+        "nature",
+        "biology",
+        "ecology"
+      ]
+    },
+    {
+      "id": "book-025",
+      "title": "Guns, Germs, and Steel",
+      "author": "Jared Diamond",
+      "publisherId": "pub-001",
+      "categoryId": "cat-004",
+      "price": 14.99,
+      "stock": 30,
+      "imageUrl": "https://placehold.co/200x300/c026d3/fff?text=Book",
+      "rating": 4.4,
+      "reviewCount": 2875,
+      "description": "Why were some civilisations able to conquer others?",
+      "isbn": "978-0-393-31755-8",
+      "publishedDate": "1997-03-01",
+      "tags": [
+        "anthropology",
+        "history",
+        "pulitzer"
+      ]
+    },
+    {
+      "id": "book-026",
+      "title": "The Silk Roads",
+      "author": "Peter Frankopan",
+      "publisherId": "pub-001",
+      "categoryId": "cat-004",
+      "price": 15.49,
+      "stock": 22,
+      "imageUrl": "https://placehold.co/200x300/d97706/fff?text=Book",
+      "rating": 4.5,
+      "reviewCount": 1230,
+      "description": "A new history of the world told through the routes of trade and culture.",
+      "isbn": "978-1-101-91277-1",
+      "publishedDate": "2015-09-03",
+      "tags": [
+        "world history",
+        "trade",
+        "bestseller"
+      ]
+    },
+    {
+      "id": "book-027",
+      "title": "SPQR: A History of Ancient Rome",
+      "author": "Mary Beard",
+      "publisherId": "pub-001",
+      "categoryId": "cat-004",
+      "price": 14.99,
+      "stock": 19,
+      "imageUrl": "https://placehold.co/200x300/0891b2/fff?text=Book",
+      "rating": 4.4,
+      "reviewCount": 890,
+      "description": "A groundbreaking history of ancient Rome from a world-class classicist.",
+      "isbn": "978-0-871-40554-1",
+      "publishedDate": "2015-10-20",
+      "tags": [
+        "roman history",
+        "classics",
+        "academic"
+      ]
+    },
+    {
+      "id": "book-028",
+      "title": "The Wright Brothers",
+      "author": "David McCullough",
+      "publisherId": "pub-004",
+      "categoryId": "cat-004",
+      "price": 13.99,
+      "stock": 25,
+      "imageUrl": "https://placehold.co/200x300/7f1d1d/fff?text=Book",
+      "rating": 4.7,
+      "reviewCount": 1680,
+      "description": "The remarkable story of two brothers who changed the world forever.",
+      "isbn": "978-1-476-72874-9",
+      "publishedDate": "2015-05-05",
+      "tags": [
+        "biography",
+        "aviation",
+        "american history"
+      ]
+    },
+    {
+      "id": "book-029",
+      "title": "The Diary of a Young Girl",
+      "author": "Anne Frank",
+      "publisherId": "pub-003",
+      "categoryId": "cat-004",
+      "price": 10.99,
+      "stock": 65,
+      "imageUrl": "https://placehold.co/200x300/881337/fff?text=Book",
+      "rating": 4.9,
+      "reviewCount": 9210,
+      "description": "The unforgettable diary of Anne Frank during WWII occupation.",
+      "isbn": "978-0-553-29698-2",
+      "publishedDate": "1947-06-25",
+      "tags": [
+        "wwii",
+        "memoir",
+        "classic"
+      ]
+    },
+    {
+      "id": "book-030",
+      "title": "Clean Code",
+      "author": "Robert C. Martin",
+      "publisherId": "pub-002",
+      "categoryId": "cat-005",
+      "price": 35.99,
+      "stock": 40,
+      "imageUrl": "https://placehold.co/200x300/334155/fff?text=Book",
+      "rating": 4.7,
+      "reviewCount": 5320,
+      "description": "A handbook of agile software craftsmanship for every developer.",
+      "isbn": "978-0-132-35088-4",
+      "publishedDate": "2008-08-01",
+      "tags": [
+        "programming",
+        "best practices",
+        "engineering"
+      ]
+    },
+    {
+      "id": "book-031",
+      "title": "The Pragmatic Programmer",
+      "author": "David Thomas & Andrew Hunt",
+      "publisherId": "pub-002",
+      "categoryId": "cat-005",
+      "price": 39.99,
+      "stock": 35,
+      "imageUrl": "https://placehold.co/200x300/1e293b/fff?text=Book",
+      "rating": 4.8,
+      "reviewCount": 4105,
+      "description": "Your journey to mastery in software development.",
+      "isbn": "978-0-135-95705-9",
+      "publishedDate": "2019-09-13",
+      "tags": [
+        "programming",
+        "career",
+        "engineering"
+      ]
+    },
+    {
+      "id": "book-032",
+      "title": "Designing Data-Intensive Applications",
+      "author": "Martin Kleppmann",
+      "publisherId": "pub-005",
+      "categoryId": "cat-005",
+      "price": 49.99,
+      "stock": 22,
+      "imageUrl": "https://placehold.co/200x300/0c4a6e/fff?text=Book",
+      "rating": 4.9,
+      "reviewCount": 3760,
+      "description": "The definitive guide to building reliable, scalable, and maintainable systems.",
+      "isbn": "978-1-449-37332-0",
+      "publishedDate": "2017-04-02",
+      "tags": [
+        "databases",
+        "distributed systems",
+        "architecture"
+      ]
+    },
+    {
+      "id": "book-033",
+      "title": "You Don't Know JS Yet",
+      "author": "Kyle Simpson",
+      "publisherId": "pub-005",
+      "categoryId": "cat-005",
+      "price": 29.99,
+      "stock": 30,
+      "imageUrl": "https://placehold.co/200x300/172554/fff?text=Book",
+      "rating": 4.7,
+      "reviewCount": 2890,
+      "description": "A deep dive into the core mechanisms of the JavaScript language.",
+      "isbn": "978-1-491-92221-8",
+      "publishedDate": "2020-01-28",
+      "tags": [
+        "javascript",
+        "web development",
+        "programming"
+      ]
+    },
+    {
+      "id": "book-034",
+      "title": "The Algorithm Design Manual",
+      "author": "Steven Skiena",
+      "publisherId": "pub-008",
+      "categoryId": "cat-005",
+      "price": 54.99,
+      "stock": 12,
+      "imageUrl": "https://placehold.co/200x300/1e40af/fff?text=Book",
+      "rating": 4.6,
+      "reviewCount": 1540,
+      "description": "A practical guide to algorithm design with real-world applications.",
+      "isbn": "978-3-030-54255-9",
+      "publishedDate": "2020-10-05",
+      "tags": [
+        "algorithms",
+        "computer science",
+        "academic"
+      ]
+    },
+    {
+      "id": "book-035",
+      "title": "AI Superpowers",
+      "author": "Kai-Fu Lee",
+      "publisherId": "pub-002",
+      "categoryId": "cat-005",
+      "price": 15.99,
+      "stock": 37,
+      "imageUrl": "https://placehold.co/200x300/3730a3/fff?text=Book",
+      "rating": 4.3,
+      "reviewCount": 1125,
+      "description": "China, Silicon Valley, and the new world order of artificial intelligence.",
+      "isbn": "978-0-358-10520-7",
+      "publishedDate": "2018-09-25",
+      "tags": [
+        "artificial intelligence",
+        "geopolitics",
+        "future"
+      ]
+    },
+    {
+      "id": "book-036",
+      "title": "The Phoenix Project",
+      "author": "Gene Kim",
+      "publisherId": "pub-005",
+      "categoryId": "cat-005",
+      "price": 21.99,
+      "stock": 28,
+      "imageUrl": "https://placehold.co/200x300/312e81/fff?text=Book",
+      "rating": 4.6,
+      "reviewCount": 2780,
+      "description": "A novel about IT, DevOps, and helping your business win.",
+      "isbn": "978-1-942-78802-4",
+      "publishedDate": "2018-04-05",
+      "tags": [
+        "devops",
+        "it management",
+        "novel"
+      ]
+    },
+    {
+      "id": "book-037",
+      "title": "The Very Hungry Caterpillar",
+      "author": "Eric Carle",
+      "publisherId": "pub-001",
+      "categoryId": "cat-006",
+      "price": 8.99,
+      "stock": 80,
+      "imageUrl": "https://placehold.co/200x300/86efac/000?text=Book",
+      "rating": 4.9,
+      "reviewCount": 12500,
+      "description": "A beloved classic picture book following a caterpillar's journey.",
+      "isbn": "978-0-399-22690-0",
+      "publishedDate": "1969-06-03",
+      "tags": [
+        "picture book",
+        "classic",
+        "toddler"
+      ]
+    },
+    {
+      "id": "book-038",
+      "title": "Charlotte's Web",
+      "author": "E.B. White",
+      "publisherId": "pub-002",
+      "categoryId": "cat-006",
+      "price": 9.99,
+      "stock": 55,
+      "imageUrl": "https://placehold.co/200x300/fde68a/000?text=Book",
+      "rating": 4.8,
+      "reviewCount": 7840,
+      "description": "The friendship between a pig named Wilbur and a spider named Charlotte.",
+      "isbn": "978-0-064-40055-1",
+      "publishedDate": "1952-10-15",
+      "tags": [
+        "classic",
+        "friendship",
+        "animals"
+      ]
+    },
+    {
+      "id": "book-039",
+      "title": "Harry Potter and the Philosopher's Stone",
+      "author": "J.K. Rowling",
+      "publisherId": "pub-007",
+      "categoryId": "cat-006",
+      "price": 11.99,
+      "stock": 95,
+      "imageUrl": "https://placehold.co/200x300/7c3aed/fff?text=Book",
+      "rating": 4.9,
+      "reviewCount": 24300,
+      "description": "The first book in the legendary Harry Potter series.",
+      "isbn": "978-1-408-85526-4",
+      "publishedDate": "1997-06-26",
+      "tags": [
+        "fantasy",
+        "magic",
+        "series"
+      ]
+    },
+    {
+      "id": "book-040",
+      "title": "The Gruffalo",
+      "author": "Julia Donaldson",
+      "publisherId": "pub-003",
+      "categoryId": "cat-006",
+      "price": 7.99,
+      "stock": 62,
+      "imageUrl": "https://placehold.co/200x300/fbbf24/000?text=Book",
+      "rating": 4.8,
+      "reviewCount": 5100,
+      "description": "A mouse takes a walk in the deep dark wood and outwits every predator.",
+      "isbn": "978-0-333-71093-9",
+      "publishedDate": "1999-01-01",
+      "tags": [
+        "picture book",
+        "rhyme",
+        "classic"
+      ]
+    },
+    {
+      "id": "book-041",
+      "title": "Wonder",
+      "author": "R.J. Palacio",
+      "publisherId": "pub-001",
+      "categoryId": "cat-006",
+      "price": 9.99,
+      "stock": 44,
+      "imageUrl": "https://placehold.co/200x300/fb923c/fff?text=Book",
+      "rating": 4.8,
+      "reviewCount": 6320,
+      "description": "A story about August Pullman, a boy with facial differences who starts school.",
+      "isbn": "978-0-375-86902-0",
+      "publishedDate": "2012-02-14",
+      "tags": [
+        "middle grade",
+        "kindness",
+        "inspiring"
+      ]
+    },
+    {
+      "id": "book-042",
+      "title": "Matilda",
+      "author": "Roald Dahl",
+      "publisherId": "pub-007",
+      "categoryId": "cat-006",
+      "price": 8.99,
+      "stock": 58,
+      "imageUrl": "https://placehold.co/200x300/4f46e5/fff?text=Book",
+      "rating": 4.9,
+      "reviewCount": 8740,
+      "description": "Matilda is a brilliant girl stuck with dim-witted parents and a terrifying headmistress.",
+      "isbn": "978-0-142-41037-6",
+      "publishedDate": "1988-10-01",
+      "tags": [
+        "classic",
+        "humor",
+        "magic"
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat-001",
+      "name": "Fiction",
+      "slug": "fiction",
+      "description": "Novels, short stories, and imaginative narratives."
+    },
+    {
+      "id": "cat-002",
+      "name": "Non-Fiction",
+      "slug": "non-fiction",
+      "description": "Biographies, essays, and factual accounts."
+    },
+    {
+      "id": "cat-003",
+      "name": "Science",
+      "slug": "science",
+      "description": "Physics, biology, astronomy, and more."
+    },
+    {
+      "id": "cat-004",
+      "name": "History",
+      "slug": "history",
+      "description": "World events, civilisations, and historical analysis."
+    },
+    {
+      "id": "cat-005",
+      "name": "Technology",
+      "slug": "technology",
+      "description": "Programming, AI, hardware, and software engineering."
+    },
+    {
+      "id": "cat-006",
+      "name": "Children's",
+      "slug": "childrens",
+      "description": "Books for young readers of all ages."
+    }
+  ],
+  "publishers": [
+    {
+      "id": "pub-001",
+      "name": "Penguin Random House",
+      "country": "USA",
+      "website": "https://www.penguinrandomhouse.com"
+    },
+    {
+      "id": "pub-002",
+      "name": "HarperCollins",
+      "country": "USA",
+      "website": "https://www.harpercollins.com"
+    },
+    {
+      "id": "pub-003",
+      "name": "Macmillan Publishers",
+      "country": "USA",
+      "website": "https://us.macmillan.com"
+    },
+    {
+      "id": "pub-004",
+      "name": "Simon & Schuster",
+      "country": "USA",
+      "website": "https://www.simonandschuster.com"
+    },
+    {
+      "id": "pub-005",
+      "name": "Hachette Book Group",
+      "country": "USA",
+      "website": "https://www.hachettebookgroup.com"
+    },
+    {
+      "id": "pub-006",
+      "name": "Oxford University Press",
+      "country": "UK",
+      "website": "https://global.oup.com"
+    },
+    {
+      "id": "pub-007",
+      "name": "Bloomsbury Publishing",
+      "country": "UK",
+      "website": "https://www.bloomsbury.com"
+    },
+    {
+      "id": "pub-008",
+      "name": "MIT Press",
+      "country": "USA",
+      "website": "https://mitpress.mit.edu"
+    }
+  ],
+  "carts": [
+    {
+      "id": "cart-001",
+      "userId": "user-001",
+      "items": [
+        {
+          "bookId": "book-003",
+          "title": "The House in the Cerulean Sea",
+          "author": "TJ Klune",
+          "price": 13.99,
+          "imageUrl": "https://placehold.co/200x300/10b981/fff?text=Book",
+          "quantity": 1,
+          "stock": 45
+        }
+      ],
+      "updatedAt": "2026-08-15T12:55:44.140Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": "order-001",
+      "userId": "user-001",
+      "status": "delivered",
+      "items": [
+        {
+          "bookId": "book-004",
+          "title": "Project Hail Mary",
+          "author": "Andy Weir",
+          "price": 16.99,
+          "imageUrl": "https://placehold.co/200x300/f59e0b/fff?text=Book",
+          "quantity": 1
+        },
+        {
+          "bookId": "book-013",
+          "title": "Atomic Habits",
+          "author": "James Clear",
+          "price": 15.99,
+          "imageUrl": "https://placehold.co/200x300/16a34a/fff?text=Book",
+          "quantity": 1
+        }
+      ],
+      "placedAt": "2026-07-01T12:55:44.138Z",
+      "deliveryAddress": {
+        "id": "addr-001",
+        "userId": "user-001",
+        "name": "Alex Johnson",
+        "line1": "42 Elm Street",
+        "line2": "Apt 3B",
+        "city": "Springfield",
+        "state": "IL",
+        "postcode": "62701",
+        "country": "USA",
+        "isDefault": true
+      },
+      "paymentMethod": "pm-001",
+      "giftPointsUsed": 0,
+      "totalAmount": 32.98,
+      "deliveryInfo": {
+        "estimatedDate": "2026-07-08T12:55:44.140Z",
+        "trackingNumber": "TRK-10010",
+        "carrier": "UPS"
+      }
+    },
+    {
+      "id": "order-002",
+      "userId": "user-001",
+      "status": "delivered",
+      "items": [
+        {
+          "bookId": "book-030",
+          "title": "Clean Code",
+          "author": "Robert C. Martin",
+          "price": 35.99,
+          "imageUrl": "https://placehold.co/200x300/334155/fff?text=Book",
+          "quantity": 1
+        }
+      ],
+      "placedAt": "2026-07-16T12:55:44.140Z",
+      "deliveryAddress": {
+        "id": "addr-001",
+        "userId": "user-001",
+        "name": "Alex Johnson",
+        "line1": "42 Elm Street",
+        "line2": "Apt 3B",
+        "city": "Springfield",
+        "state": "IL",
+        "postcode": "62701",
+        "country": "USA",
+        "isDefault": true
+      },
+      "paymentMethod": "pm-001",
+      "giftPointsUsed": 50,
+      "totalAmount": 35.99,
+      "deliveryInfo": {
+        "estimatedDate": "2026-07-22T12:55:44.140Z",
+        "trackingNumber": "TRK-10011",
+        "carrier": "FedEx"
+      }
+    },
+    {
+      "id": "order-003",
+      "userId": "user-001",
+      "status": "delivered",
+      "items": [
+        {
+          "bookId": "book-039",
+          "title": "Harry Potter and the Philosopher's Stone",
+          "author": "J.K. Rowling",
+          "price": 11.99,
+          "imageUrl": "https://placehold.co/200x300/7c3aed/fff?text=Book",
+          "quantity": 1
+        },
+        {
+          "bookId": "book-042",
+          "title": "Matilda",
+          "author": "Roald Dahl",
+          "price": 8.99,
+          "imageUrl": "https://placehold.co/200x300/4f46e5/fff?text=Book",
+          "quantity": 1
+        }
+      ],
+      "placedAt": "2026-07-26T12:55:44.140Z",
+      "deliveryAddress": {
+        "id": "addr-002",
+        "userId": "user-001",
+        "name": "Alex Johnson",
+        "line1": "18 Oak Avenue",
+        "line2": "",
+        "city": "Chicago",
+        "state": "IL",
+        "postcode": "60601",
+        "country": "USA",
+        "isDefault": false
+      },
+      "paymentMethod": "pm-001",
+      "giftPointsUsed": 0,
+      "totalAmount": 20.98,
+      "deliveryInfo": {
+        "estimatedDate": "2026-08-02T12:55:44.140Z",
+        "trackingNumber": "TRK-10012",
+        "carrier": "USPS"
+      }
+    },
+    {
+      "id": "order-004",
+      "userId": "user-001",
+      "status": "shipped",
+      "items": [
+        {
+          "bookId": "book-032",
+          "title": "Designing Data-Intensive Applications",
+          "author": "Martin Kleppmann",
+          "price": 49.99,
+          "imageUrl": "https://placehold.co/200x300/0c4a6e/fff?text=Book",
+          "quantity": 1
+        }
+      ],
+      "placedAt": "2026-08-10T12:55:44.140Z",
+      "deliveryAddress": {
+        "id": "addr-001",
+        "userId": "user-001",
+        "name": "Alex Johnson",
+        "line1": "42 Elm Street",
+        "line2": "Apt 3B",
+        "city": "Springfield",
+        "state": "IL",
+        "postcode": "62701",
+        "country": "USA",
+        "isDefault": true
+      },
+      "paymentMethod": "pm-002",
+      "giftPointsUsed": 100,
+      "totalAmount": 49.99,
+      "deliveryInfo": {
+        "estimatedDate": "2026-08-17T12:55:44.140Z",
+        "trackingNumber": "TRK-10013",
+        "carrier": "FedEx"
+      }
+    },
+    {
+      "id": "order-005",
+      "userId": "user-001",
+      "status": "processing",
+      "items": [
+        {
+          "bookId": "book-001",
+          "title": "The Midnight Library",
+          "author": "Matt Haig",
+          "price": 14.99,
+          "imageUrl": "https://placehold.co/200x300/3b82f6/fff?text=Book",
+          "quantity": 1
+        },
+        {
+          "bookId": "book-008",
+          "title": "Circe",
+          "author": "Madeline Miller",
+          "price": 13.99,
+          "imageUrl": "https://placehold.co/200x300/0ea5e9/fff?text=Book",
+          "quantity": 1
+        }
+      ],
+      "placedAt": "2026-08-13T12:55:44.140Z",
+      "deliveryAddress": {
+        "id": "addr-001",
+        "userId": "user-001",
+        "name": "Alex Johnson",
+        "line1": "42 Elm Street",
+        "line2": "Apt 3B",
+        "city": "Springfield",
+        "state": "IL",
+        "postcode": "62701",
+        "country": "USA",
+        "isDefault": true
+      },
+      "paymentMethod": "pm-001",
+      "giftPointsUsed": 0,
+      "totalAmount": 28.98,
+      "deliveryInfo": {
+        "estimatedDate": "2026-08-20T12:55:44.140Z",
+        "trackingNumber": null,
+        "carrier": null
+      }
+    },
+    {
+      "id": "order-006",
+      "userId": "user-001",
+      "status": "pending",
+      "items": [
+        {
+          "bookId": "book-011",
+          "title": "Sapiens: A Brief History of Humankind",
+          "author": "Yuval Noah Harari",
+          "price": 16.99,
+          "imageUrl": "https://placehold.co/200x300/f97316/fff?text=Book",
+          "quantity": 2
+        }
+      ],
+      "placedAt": "2026-08-15T12:55:44.140Z",
+      "deliveryAddress": {
+        "id": "addr-003",
+        "userId": "user-001",
+        "name": "Alex Johnson",
+        "line1": "7 Maple Court",
+        "line2": "",
+        "city": "Naperville",
+        "state": "IL",
+        "postcode": "60540",
+        "country": "USA",
+        "isDefault": false
+      },
+      "paymentMethod": "pm-001",
+      "giftPointsUsed": 0,
+      "totalAmount": 33.98,
+      "deliveryInfo": {
+        "estimatedDate": "2026-08-22T12:55:44.140Z",
+        "trackingNumber": null,
+        "carrier": null
+      }
+    },
+    {
+      "id": "order-007",
+      "userId": "user-001",
+      "status": "cancelled",
+      "items": [
+        {
+          "bookId": "book-015",
+          "title": "Thinking, Fast and Slow",
+          "author": "Daniel Kahneman",
+          "price": 14.99,
+          "imageUrl": "https://placehold.co/200x300/be123c/fff?text=Book",
+          "quantity": 1
+        }
+      ],
+      "placedAt": "2026-06-16T12:55:44.140Z",
+      "deliveryAddress": {
+        "id": "addr-001",
+        "userId": "user-001",
+        "name": "Alex Johnson",
+        "line1": "42 Elm Street",
+        "line2": "Apt 3B",
+        "city": "Springfield",
+        "state": "IL",
+        "postcode": "62701",
+        "country": "USA",
+        "isDefault": true
+      },
+      "paymentMethod": "pm-001",
+      "giftPointsUsed": 0,
+      "totalAmount": 14.99,
+      "deliveryInfo": {
+        "estimatedDate": "2026-06-23T12:55:44.140Z",
+        "trackingNumber": null,
+        "carrier": null
+      }
+    },
+    {
+      "id": "order-008",
+      "userId": "user-002",
+      "status": "delivered",
+      "items": [
+        {
+          "bookId": "book-019",
+          "title": "A Brief History of Time",
+          "author": "Stephen Hawking",
+          "price": 13.99,
+          "imageUrl": "https://placehold.co/200x300/1d4ed8/fff?text=Book",
+          "quantity": 1
+        },
+        {
+          "bookId": "book-023",
+          "title": "Cosmos",
+          "author": "Carl Sagan",
+          "price": 14.99,
+          "imageUrl": "https://placehold.co/200x300/f43f5e/fff?text=Book",
+          "quantity": 1
+        }
+      ],
+      "placedAt": "2026-07-21T12:55:44.140Z",
+      "deliveryAddress": {
+        "id": "addr-004",
+        "userId": "user-002",
+        "name": "Sam Rivera",
+        "line1": "99 Sunset Blvd",
+        "line2": "",
+        "city": "Los Angeles",
+        "state": "CA",
+        "postcode": "90028",
+        "country": "USA",
+        "isDefault": true
+      },
+      "paymentMethod": "pm-003",
+      "giftPointsUsed": 0,
+      "totalAmount": 28.98,
+      "deliveryInfo": {
+        "estimatedDate": "2026-07-27T12:55:44.140Z",
+        "trackingNumber": "TRK-20001",
+        "carrier": "USPS"
+      }
+    },
+    {
+      "id": "order-009",
+      "userId": "user-002",
+      "status": "delivered",
+      "items": [
+        {
+          "bookId": "book-031",
+          "title": "The Pragmatic Programmer",
+          "author": "David Thomas & Andrew Hunt",
+          "price": 39.99,
+          "imageUrl": "https://placehold.co/200x300/1e293b/fff?text=Book",
+          "quantity": 1
+        }
+      ],
+      "placedAt": "2026-07-31T12:55:44.140Z",
+      "deliveryAddress": {
+        "id": "addr-004",
+        "userId": "user-002",
+        "name": "Sam Rivera",
+        "line1": "99 Sunset Blvd",
+        "line2": "",
+        "city": "Los Angeles",
+        "state": "CA",
+        "postcode": "90028",
+        "country": "USA",
+        "isDefault": true
+      },
+      "paymentMethod": "pm-003",
+      "giftPointsUsed": 25,
+      "totalAmount": 39.99,
+      "deliveryInfo": {
+        "estimatedDate": "2026-08-06T12:55:44.140Z",
+        "trackingNumber": "TRK-20002",
+        "carrier": "UPS"
+      }
+    },
+    {
+      "id": "order-010",
+      "userId": "user-002",
+      "status": "processing",
+      "items": [
+        {
+          "bookId": "book-025",
+          "title": "Guns, Germs, and Steel",
+          "author": "Jared Diamond",
+          "price": 14.99,
+          "imageUrl": "https://placehold.co/200x300/c026d3/fff?text=Book",
+          "quantity": 1
+        },
+        {
+          "bookId": "book-026",
+          "title": "The Silk Roads",
+          "author": "Peter Frankopan",
+          "price": 15.49,
+          "imageUrl": "https://placehold.co/200x300/d97706/fff?text=Book",
+          "quantity": 1
+        }
+      ],
+      "placedAt": "2026-08-14T12:55:44.140Z",
+      "deliveryAddress": {
+        "id": "addr-005",
+        "userId": "user-002",
+        "name": "Sam Rivera",
+        "line1": "3210 Market Street",
+        "line2": "Suite 5",
+        "city": "San Francisco",
+        "state": "CA",
+        "postcode": "94102",
+        "country": "USA",
+        "isDefault": false
+      },
+      "paymentMethod": "pm-003",
+      "giftPointsUsed": 0,
+      "totalAmount": 30.48,
+      "deliveryInfo": {
+        "estimatedDate": "2026-08-21T12:55:44.140Z",
+        "trackingNumber": null,
+        "carrier": null
+      }
+    },
+    {
+      "id": "order-011",
+      "userId": "user-001",
+      "status": "delivered",
+      "items": [
+        {
+          "bookId": "book-005",
+          "title": "The Seven Husbands of Evelyn Hugo",
+          "author": "Taylor Jenkins Reid",
+          "price": 12.99,
+          "imageUrl": "https://placehold.co/200x300/ec4899/fff?text=Book",
+          "quantity": 1
+        },
+        {
+          "bookId": "book-007",
+          "title": "Lessons in Chemistry",
+          "author": "Bonnie Garmus",
+          "price": 14.49,
+          "imageUrl": "https://placehold.co/200x300/ef4444/fff?text=Book",
+          "quantity": 1
+        }
+      ],
+      "placedAt": "2026-06-21T12:55:44.140Z",
+      "deliveryAddress": {
+        "id": "addr-002",
+        "userId": "user-001",
+        "name": "Alex Johnson",
+        "line1": "18 Oak Avenue",
+        "line2": "",
+        "city": "Chicago",
+        "state": "IL",
+        "postcode": "60601",
+        "country": "USA",
+        "isDefault": false
+      },
+      "paymentMethod": "pm-001",
+      "giftPointsUsed": 0,
+      "totalAmount": 27.48,
+      "deliveryInfo": {
+        "estimatedDate": "2026-06-28T12:55:44.140Z",
+        "trackingNumber": "TRK-10014",
+        "carrier": "UPS"
+      }
+    },
+    {
+      "id": "order-012",
+      "userId": "user-001",
+      "status": "delivered",
+      "items": [
+        {
+          "bookId": "book-016",
+          "title": "Becoming",
+          "author": "Michelle Obama",
+          "price": 17.99,
+          "imageUrl": "https://placehold.co/200x300/0284c7/fff?text=Book",
+          "quantity": 1
+        }
+      ],
+      "placedAt": "2026-07-06T12:55:44.140Z",
+      "deliveryAddress": {
+        "id": "addr-001",
+        "userId": "user-001",
+        "name": "Alex Johnson",
+        "line1": "42 Elm Street",
+        "line2": "Apt 3B",
+        "city": "Springfield",
+        "state": "IL",
+        "postcode": "62701",
+        "country": "USA",
+        "isDefault": true
+      },
+      "paymentMethod": "pm-002",
+      "giftPointsUsed": 0,
+      "totalAmount": 17.99,
+      "deliveryInfo": {
+        "estimatedDate": "2026-07-13T12:55:44.140Z",
+        "trackingNumber": "TRK-10015",
+        "carrier": "FedEx"
+      }
+    }
+  ],
+  "addresses": [
+    {
+      "id": "addr-001",
+      "userId": "user-001",
+      "name": "Alex Johnson",
+      "line1": "42 Elm Street",
+      "line2": "Apt 3B",
+      "city": "Springfield",
+      "state": "IL",
+      "postcode": "62701",
+      "country": "USA",
+      "isDefault": true
+    },
+    {
+      "id": "addr-002",
+      "userId": "user-001",
+      "name": "Alex Johnson",
+      "line1": "18 Oak Avenue",
+      "line2": "",
+      "city": "Chicago",
+      "state": "IL",
+      "postcode": "60601",
+      "country": "USA",
+      "isDefault": false
+    },
+    {
+      "id": "addr-003",
+      "userId": "user-001",
+      "name": "Alex Johnson",
+      "line1": "7 Maple Court",
+      "line2": "",
+      "city": "Naperville",
+      "state": "IL",
+      "postcode": "60540",
+      "country": "USA",
+      "isDefault": false
+    },
+    {
+      "id": "addr-004",
+      "userId": "user-002",
+      "name": "Sam Rivera",
+      "line1": "99 Sunset Blvd",
+      "line2": "",
+      "city": "Los Angeles",
+      "state": "CA",
+      "postcode": "90028",
+      "country": "USA",
+      "isDefault": true
+    },
+    {
+      "id": "addr-005",
+      "userId": "user-002",
+      "name": "Sam Rivera",
+      "line1": "3210 Market Street",
+      "line2": "Suite 5",
+      "city": "San Francisco",
+      "state": "CA",
+      "postcode": "94102",
+      "country": "USA",
+      "isDefault": false
+    }
+  ],
+  "recommendations": [
+    {
+      "id": "rec-001",
+      "userId": "user-001",
+      "bookId": "book-003",
+      "score": 0.97,
+      "reason": "similar_purchase",
+      "createdAt": "2026-08-14T12:55:44.140Z"
+    },
+    {
+      "id": "rec-002",
+      "userId": "user-001",
+      "bookId": "book-007",
+      "score": 0.92,
+      "reason": "category_match",
+      "createdAt": "2026-08-14T12:55:44.140Z"
+    },
+    {
+      "id": "rec-003",
+      "userId": "user-001",
+      "bookId": "book-033",
+      "score": 0.89,
+      "reason": "similar_purchase",
+      "createdAt": "2026-08-14T12:55:44.140Z"
+    },
+    {
+      "id": "rec-004",
+      "userId": "user-001",
+      "bookId": "book-023",
+      "score": 0.88,
+      "reason": "trending",
+      "createdAt": "2026-08-14T12:55:44.140Z"
+    },
+    {
+      "id": "rec-005",
+      "userId": "user-001",
+      "bookId": "book-029",
+      "score": 0.85,
+      "reason": "staff_pick",
+      "createdAt": "2026-08-14T12:55:44.140Z"
+    },
+    {
+      "id": "rec-006",
+      "userId": "user-001",
+      "bookId": "book-036",
+      "score": 0.83,
+      "reason": "category_match",
+      "createdAt": "2026-08-14T12:55:44.140Z"
+    },
+    {
+      "id": "rec-007",
+      "userId": "user-002",
+      "bookId": "book-004",
+      "score": 0.95,
+      "reason": "trending",
+      "createdAt": "2026-08-14T12:55:44.140Z"
+    },
+    {
+      "id": "rec-008",
+      "userId": "user-002",
+      "bookId": "book-034",
+      "score": 0.9,
+      "reason": "similar_purchase",
+      "createdAt": "2026-08-14T12:55:44.140Z"
+    },
+    {
+      "id": "rec-009",
+      "userId": "user-002",
+      "bookId": "book-012",
+      "score": 0.87,
+      "reason": "staff_pick",
+      "createdAt": "2026-08-14T12:55:44.140Z"
+    },
+    {
+      "id": "rec-010",
+      "userId": "user-002",
+      "bookId": "book-041",
+      "score": 0.82,
+      "reason": "category_match",
+      "createdAt": "2026-08-14T12:55:44.140Z"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "rev-001",
+      "bookId": "book-001",
+      "userId": "user-001",
+      "userName": "Alex J.",
+      "rating": 5,
+      "title": "Life-changing read",
+      "body": "This book made me reflect on all the choices I have made. Beautifully written.",
+      "createdAt": "2024-01-15T09:22:00Z",
+      "helpfulCount": 34
+    },
+    {
+      "id": "rev-002",
+      "bookId": "book-001",
+      "userId": "user-002",
+      "userName": "Sam R.",
+      "rating": 4,
+      "title": "Thoughtful and moving",
+      "body": "A gentle and optimistic story. Left me feeling hopeful.",
+      "createdAt": "2024-02-03T14:10:00Z",
+      "helpfulCount": 18
+    },
+    {
+      "id": "rev-003",
+      "bookId": "book-004",
+      "userId": "user-001",
+      "userName": "Alex J.",
+      "rating": 5,
+      "title": "Best sci-fi in years",
+      "body": "Andy Weir has outdone himself. The science feels real and the story is gripping.",
+      "createdAt": "2024-03-11T11:05:00Z",
+      "helpfulCount": 52
+    },
+    {
+      "id": "rev-004",
+      "bookId": "book-013",
+      "userId": "user-001",
+      "userName": "Alex J.",
+      "rating": 5,
+      "title": "Practical and transformative",
+      "body": "Changed how I think about building habits. Highly recommend to everyone.",
+      "createdAt": "2024-01-28T08:40:00Z",
+      "helpfulCount": 41
+    },
+    {
+      "id": "rev-005",
+      "bookId": "book-030",
+      "userId": "user-002",
+      "userName": "Sam R.",
+      "rating": 5,
+      "title": "A must for every developer",
+      "body": "Every software engineer should read this. The naming and function chapters alone are worth it.",
+      "createdAt": "2024-02-22T16:30:00Z",
+      "helpfulCount": 66
+    },
+    {
+      "id": "rev-006",
+      "bookId": "book-032",
+      "userId": "user-002",
+      "userName": "Sam R.",
+      "rating": 5,
+      "title": "The definitive backend book",
+      "body": "Dense but incredibly rewarding. Read it twice and still learning.",
+      "createdAt": "2024-04-05T20:14:00Z",
+      "helpfulCount": 78
+    },
+    {
+      "id": "rev-007",
+      "bookId": "book-039",
+      "userId": "user-001",
+      "userName": "Alex J.",
+      "rating": 5,
+      "title": "Timeless classic",
+      "body": "Read it as a child, read it again now. Still magical.",
+      "createdAt": "2024-03-20T12:00:00Z",
+      "helpfulCount": 105
+    },
+    {
+      "id": "rev-008",
+      "bookId": "book-011",
+      "userId": "user-002",
+      "userName": "Sam R.",
+      "rating": 5,
+      "title": "Perspective-shifting",
+      "body": "Made me reconsider everything about what it means to be human. Essential reading.",
+      "createdAt": "2024-02-10T07:30:00Z",
+      "helpfulCount": 90
+    },
+    {
+      "id": "rev-009",
+      "bookId": "book-019",
+      "userId": "user-001",
+      "userName": "Alex J.",
+      "rating": 4,
+      "title": "Dense but rewarding",
+      "body": "Complex physics explained accessibly. A few parts lost me but the overall experience is excellent.",
+      "createdAt": "2024-01-05T10:00:00Z",
+      "helpfulCount": 29
+    },
+    {
+      "id": "rev-010",
+      "bookId": "book-042",
+      "userId": "user-002",
+      "userName": "Sam R.",
+      "rating": 5,
+      "title": "A childhood masterpiece",
+      "body": "Roald Dahl at his absolute best. Funny, smart, and inspiring.",
+      "createdAt": "2024-04-12T15:45:00Z",
+      "helpfulCount": 62
+    }
+  ],
+  "giftPointsBalances": [
+    {
+      "id": "gpb-001",
+      "userId": "user-001",
+      "balance": 350,
+      "updatedAt": "2024-03-15T08:00:00Z"
+    },
+    {
+      "id": "gpb-002",
+      "userId": "user-002",
+      "balance": 75,
+      "updatedAt": "2024-02-20T10:00:00Z"
+    }
+  ],
+  "paymentMethods": [
+    {
+      "id": "pm-001",
+      "userId": "user-001",
+      "type": "credit_card",
+      "last4": "4242",
+      "expiryMonth": 12,
+      "expiryYear": 2027,
+      "cardholderName": "Alex Johnson",
+      "isDefault": true
+    },
+    {
+      "id": "pm-002",
+      "userId": "user-001",
+      "type": "debit_card",
+      "last4": "1881",
+      "expiryMonth": 6,
+      "expiryYear": 2026,
+      "cardholderName": "Alex Johnson",
+      "isDefault": false
+    },
+    {
+      "id": "pm-003",
+      "userId": "user-002",
+      "type": "paypal",
+      "last4": null,
+      "expiryMonth": null,
+      "expiryYear": null,
+      "cardholderName": "Sam Rivera",
+      "isDefault": true
+    }
+  ]
 }
