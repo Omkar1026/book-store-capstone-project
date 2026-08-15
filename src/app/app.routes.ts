@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './core/guards/auth.guard';
 import { guestGuard } from './core/guards/guest.guard';
+import { CheckoutStore } from './core/store/checkout.store';
 
 export const routes: Routes = [
   // Default redirect
@@ -87,6 +88,7 @@ export const routes: Routes = [
   {
     path: 'checkout',
     canActivate: [authGuard],
+    providers: [CheckoutStore],
     children: [
       {
         path: 'address',

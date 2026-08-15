@@ -452,7 +452,7 @@ Implement all NgRx Signal Stores so that components never call services directly
 - `withHooks` for `onInit` hydration in `AuthStore`
 - `CheckoutStore` spans 3 pages — must be provided at the `checkout` route level (not root)
 
-**Status** — `[ ] pending`
+**Status** — `[x] complete`
 
 ---
 
