@@ -485,7 +485,7 @@ Build all reusable presentational components so that every feature page assemble
 
 ---
 
-### Sub-Task 6 — Authentication Feature (Login & Register)
+### Sub-Task 6 — Authentication Feature (Login & Register) ✅
 
 **Intent**  
 Implement the login and register pages with full form validation, error handling, and navigation to the intended destination after successful auth. This gates the entire authenticated portion of the application.
@@ -513,7 +513,7 @@ Implement the login and register pages with full form validation, error handling
 - `auth.store.ts` — login(), register(), isLoading, error signals
 - `guest.guard.ts` — applied to `/auth/login` and `/auth/register` routes
 
-**Status** — `[ ] pending`
+**Status** — `[x] complete`
 
 ---
 
