@@ -12,9 +12,12 @@ interface CartState {
   error: string | null;
 }
 
+// If a user token exists in storage the cart will be fetched immediately on
+// app init. Start isLoading=true so the cart page never flashes the empty-state
+// before the first response arrives.
 const initialState: CartState = {
   cart: null,
-  isLoading: false,
+  isLoading: !!localStorage.getItem('token'),
   error: null
 };
 
@@ -34,7 +37,27 @@ export const CartStore = signalStore(
         tap(() => patchState(store, { isLoading: true, error: null })),
         switchMap(userId =>
           cartService.getCartByUserId(userId).pipe(
-            tap(carts => patchState(store, { cart: carts[0] ?? null, isLoading: false })),
+            switchMap(carts => {
+              if (carts.length > 0) {
+                patchState(store, { cart: carts[0], isLoading: false });
+                return EMPTY;
+              }
+              // No cart exists yet — create one for this user
+              const newCart: Cart = {
+                id: `cart-${Date.now()}`,
+                userId,
+                items: [],
+                updatedAt: new Date().toISOString()
+              };
+              return cartService.createCart(newCart).pipe(
+                tap(created => patchState(store, { cart: created, isLoading: false })),
+                catchError(() => {
+                  // createCart failed — still unblock the UI with an empty in-memory cart
+                  patchState(store, { cart: newCart, isLoading: false });
+                  return EMPTY;
+                })
+              );
+            }),
             catchError(err => {
               patchState(store, { isLoading: false, error: err?.error?.message ?? 'Failed to load cart' });
               return EMPTY;
@@ -106,6 +129,11 @@ export const CartStore = signalStore(
       cartService.updateCart(current.id, { items: [], updatedAt: updatedCart.updatedAt }).pipe(
         catchError(() => EMPTY)
       ).subscribe();
+    },
+
+    /** Wipes in-memory cart state (called on logout so the next user starts clean). */
+    resetCart(): void {
+      patchState(store, { cart: null, isLoading: false, error: null });
     }
   }))
 );

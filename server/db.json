@@ -40,6 +40,16 @@
         "order-010"
       ],
       "createdAt": "2023-09-14T00:00:00Z"
+    },
+    {
+      "id": "user-1786813299074",
+      "email": "omkar@abc.com",
+      "password": "omkar123",
+      "name": "Omkar",
+      "addresses": [],
+      "giftPointsBalance": 0,
+      "orderHistory": [],
+      "createdAt": "2026-08-15T17:01:39.074Z"
     }
   ],
   "books": [
@@ -988,6 +998,22 @@
         }
       ],
       "updatedAt": "2026-08-15T12:55:44.140Z"
+    },
+    {
+      "id": "cart-1786813447270",
+      "userId": "user-1786813299074",
+      "items": [
+        {
+          "bookId": "book-004",
+          "title": "Project Hail Mary",
+          "author": "Andy Weir",
+          "price": 16.99,
+          "quantity": 1,
+          "imageUrl": "https://placehold.co/200x300/f59e0b/fff?text=Book",
+          "stock": 0
+        }
+      ],
+      "updatedAt": "2026-08-15T17:07:47.473Z"
     }
   ],
   "orders": [

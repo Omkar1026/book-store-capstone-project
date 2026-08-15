@@ -1,7 +1,6 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
-import { AuthStore } from '../../core/store/auth.store';
 import { CartStore } from '../../core/store/cart.store';
 
 import { CartItemComponent } from '../../shared/components/domain/cart-item/cart-item.component';
@@ -75,7 +74,6 @@ import { SpinnerComponent } from '../../shared/components/ui/spinner/spinner.com
   `
 })
 export class CartPageComponent implements OnInit {
-  private readonly authStore = inject(AuthStore);
   readonly cartStore = inject(CartStore);
   private readonly router = inject(Router);
 
@@ -90,12 +88,7 @@ export class CartPageComponent implements OnInit {
     };
   });
 
-  ngOnInit(): void {
-    const user = this.authStore.currentUser();
-    if (user) {
-      this.cartStore.loadCart(user.id);
-    }
-  }
+  ngOnInit(): void {}
 
   onQtyChange(event: { bookId: string; quantity: number }): void {
     this.cartStore.updateQty(event.bookId, event.quantity);

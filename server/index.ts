@@ -54,6 +54,16 @@ app.post('/auth/register', (req: Request, res: Response) => {
     createdAt: new Date().toISOString()
   };
   users.push(newUser).write();
+
+  // Create an empty cart for the new user
+  const newCart = {
+    id: `cart-${Date.now()}`,
+    userId: newUser.id,
+    items: [],
+    updatedAt: new Date().toISOString()
+  };
+  db.get('carts').push(newCart).write();
+
   const { password: _pw, ...safeUser } = newUser;
   return res.json({ user: safeUser, token: `mock-jwt-${newUser.id}` });
 });
