@@ -517,7 +517,7 @@ Implement the login and register pages with full form validation, error handling
 
 ---
 
-### Sub-Task 7 — Home / Landing Page
+### Sub-Task 7 — Home / Landing Page ✅
 
 **Intent**  
 Build the home page that is the first thing an authenticated (or guest) user sees: featured books, categories strip, top publishers, and personalised recommendations based on order history.
@@ -545,7 +545,7 @@ Build the home page that is the first thing an authenticated (or guest) user see
 - `recommendation.store.ts`, `catalogue.store.ts`
 - Home is a public route — recommendations fallback to trending for unauthenticated users
 
-**Status** — `[ ] pending`
+**Status** — `[x] completed`
 
 ---
 
