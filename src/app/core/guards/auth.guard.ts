@@ -1,12 +1,19 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 /**
  * AuthGuard — protects routes that require authentication.
  * Redirects unauthenticated users to /auth/login.
- * Full implementation in Sub-Task 4 (AuthStore integration).
  */
 export const authGuard: CanActivateFn = () => {
-  // Placeholder: always allow until AuthStore is implemented in Sub-Task 4
-  return true;
+  const authService = inject(AuthService);
+  const router = inject(Router);
+
+  if (authService.isLoggedIn()) {
+    return true;
+  }
+
+  router.navigate(['/auth/login']);
+  return false;
 };

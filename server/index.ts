@@ -10,12 +10,15 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-// ── Custom routes (must come BEFORE json-server router) ─────────────────────
+// Initialize json-server router first so we can use its lowdb instance
+const router = jsonServer.router(path.join(__dirname, 'db.json'));
+const middlewares = jsonServer.defaults({ nolog: true });
+
+// ── Custom routes (must come BEFORE json-server router middleware) ─────────
 
 // Auth — login
 app.post('/auth/login', (req, res) => {
-  const db = jsonServer.router(path.join(__dirname, 'db.json')) as any;
-  const users: any[] = (db as any).db.get('users').value();
+  const users: any[] = router.db.get('users').value() || [];
   const { email, password } = req.body;
   const user = users.find((u: any) => u.email === email && u.password === password);
   if (!user) {
@@ -27,28 +30,83 @@ app.post('/auth/login', (req, res) => {
 
 // Auth — register
 app.post('/auth/register', (req, res) => {
-  res.status(501).json({ message: 'Use json-server POST /users to register' });
+  const { email, password, name } = req.body;
+  if (!email || !password || !name) {
+    return res.status(400).json({ message: 'Email, password, and name are required' });
+  }
+  const users = router.db.get('users');
+  const existingUser = users.find({ email }).value();
+  if (existingUser) {
+    return res.status(400).json({ message: 'Email already registered' });
+  }
+  const newUser = {
+    id: `user-${Date.now()}`,
+    email,
+    password,
+    name,
+    addresses: [],
+    giftPointsBalance: 0,
+    orderHistory: [],
+    createdAt: new Date().toISOString()
+  };
+  users.push(newUser).write();
+  const { password: _pw, ...safeUser } = newUser;
+  return res.json({ user: safeUser, token: `mock-jwt-${newUser.id}` });
 });
 
 // Payment — simulate (1.5 s delay, always success)
-app.post('/payments/initiate', (_req, res) => {
+const handlePayment = (_req: express.Request, res: express.Response) => {
   setTimeout(() => {
     res.json({ success: true, transactionId: `txn-${Date.now()}` });
   }, 1500);
+};
+app.post('/payments', handlePayment);
+app.post('/payments/initiate', handlePayment);
+
+// Gift-points — redeem
+app.post('/gift-points/redeem', (req, res) => {
+  const { userId, amount } = req.body;
+  if (!userId || typeof amount !== 'number') {
+    return res.status(400).json({ message: 'userId and amount (number) are required' });
+  }
+  const user = router.db.get('users').find({ id: userId }).value();
+  if (!user) {
+    return res.status(404).json({ message: 'User not found' });
+  }
+  if (user.giftPointsBalance < amount) {
+    return res.status(400).json({ message: 'Insufficient points balance' });
+  }
+  
+  // Update in user table
+  user.giftPointsBalance -= amount;
+  
+  // Also update in separate giftPointsBalances table if exists
+  const gpBalance = router.db.get('giftPointsBalances').find({ userId }).value();
+  if (gpBalance) {
+    gpBalance.balance = user.giftPointsBalance;
+    gpBalance.updatedAt = new Date().toISOString();
+  }
+  
+  router.db.write(); // persists changes to db.json
+  return res.json({ success: true, newBalance: user.giftPointsBalance });
 });
 
 // Delivery date estimation
 app.get('/delivery/estimate', (req, res) => {
-  const days = Math.floor(Math.random() * 5) + 3; // 3–7 days
+  const stock = parseInt(req.query.stock as string, 10);
+  const days = isNaN(stock) || stock > 0
+    ? (Math.floor(Math.random() * 2) + 2) // 2-3 days
+    : (Math.floor(Math.random() * 3) + 7); // 7-9 days
   const deliveryDate = new Date();
   deliveryDate.setDate(deliveryDate.getDate() + days);
-  res.json({ estimatedDelivery: deliveryDate.toISOString(), days });
+  res.json({
+    estimatedDate: deliveryDate.toISOString(),
+    estimatedDelivery: deliveryDate.toISOString(), // fallback
+    days
+  });
 });
 
 // ── json-server router (standard CRUD for all resources) ───────────────────
-const router = jsonServer.router(path.join(__dirname, 'db.json'));
-const middlewares = jsonServer.defaults({ nolog: true });
-
 app.use(middlewares);
 app.use(router);
 

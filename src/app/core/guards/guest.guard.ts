@@ -1,10 +1,18 @@
-import { CanActivateFn } from '@angular/router';
+import { inject } from '@angular/core';
+import { CanActivateFn, Router } from '@angular/router';
+import { AuthService } from '../services/auth.service';
 
 /**
  * GuestGuard — prevents already-authenticated users from visiting /auth/login.
- * Full implementation in Sub-Task 4 (AuthStore integration).
  */
 export const guestGuard: CanActivateFn = () => {
-  // Placeholder: always allow until AuthStore is implemented in Sub-Task 4
-  return true;
+  const authService = inject(AuthService);
+  const router = inject(Router);
+
+  if (!authService.isLoggedIn()) {
+    return true;
+  }
+
+  router.navigate(['/']);
+  return false;
 };

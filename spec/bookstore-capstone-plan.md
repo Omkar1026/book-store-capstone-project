@@ -417,7 +417,7 @@ Implement all HTTP services, interceptors, and route guards so every feature pag
 - Auth is simulated: store `{ userId, token: 'mock-jwt-<userId>' }` in `localStorage`
 - `/checkout/*` and `/account/*` are the **only** protected Angular routes
 
-**Status** — `[ ] pending`
+**Status** — `[x] completed`
 
 ---
 
