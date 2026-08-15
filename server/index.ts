@@ -12,13 +12,14 @@ app.use(express.json());
 
 // Initialize json-server router first so we can use its lowdb instance
 const router = jsonServer.router(path.join(__dirname, 'db.json'));
-const middlewares = jsonServer.defaults({ nolog: true });
+const db = (router as any).db;
+const middlewares = jsonServer.defaults({ logger: false });
 
 // ── Custom routes (must come BEFORE json-server router middleware) ─────────
 
 // Auth — login
 app.post('/auth/login', (req, res) => {
-  const users: any[] = router.db.get('users').value() || [];
+  const users: any[] = db.get('users').value() || [];
   const { email, password } = req.body;
   const user = users.find((u: any) => u.email === email && u.password === password);
   if (!user) {
@@ -34,7 +35,7 @@ app.post('/auth/register', (req, res) => {
   if (!email || !password || !name) {
     return res.status(400).json({ message: 'Email, password, and name are required' });
   }
-  const users = router.db.get('users');
+  const users = db.get('users');
   const existingUser = users.find({ email }).value();
   if (existingUser) {
     return res.status(400).json({ message: 'Email already registered' });
@@ -69,7 +70,7 @@ app.post('/gift-points/redeem', (req, res) => {
   if (!userId || typeof amount !== 'number') {
     return res.status(400).json({ message: 'userId and amount (number) are required' });
   }
-  const user = router.db.get('users').find({ id: userId }).value();
+  const user = db.get('users').find({ id: userId }).value();
   if (!user) {
     return res.status(404).json({ message: 'User not found' });
   }
@@ -81,13 +82,13 @@ app.post('/gift-points/redeem', (req, res) => {
   user.giftPointsBalance -= amount;
   
   // Also update in separate giftPointsBalances table if exists
-  const gpBalance = router.db.get('giftPointsBalances').find({ userId }).value();
+  const gpBalance = db.get('giftPointsBalances').find({ userId }).value();
   if (gpBalance) {
     gpBalance.balance = user.giftPointsBalance;
     gpBalance.updatedAt = new Date().toISOString();
   }
   
-  router.db.write(); // persists changes to db.json
+  db.write(); // persists changes to db.json
   return res.json({ success: true, newBalance: user.giftPointsBalance });
 });
 

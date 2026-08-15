@@ -549,7 +549,7 @@ Build the home page that is the first thing an authenticated (or guest) user see
 
 ---
 
-### Sub-Task 8 — Product Catalogue Feature
+### Sub-Task 8 — Product Catalogue Feature ✅
 
 **Intent**  
 Implement the full catalogue browsing experience: grid view with filter sidebar, category browsing, publisher browsing, search, sort, and pagination.
@@ -579,7 +579,7 @@ Implement the full catalogue browsing experience: grid view with filter sidebar,
 - `catalogue.store.ts` — filter, page, sort signals + loadBooks method
 - json-server supports `_page`, `_limit`, `_sort`, `q` natively
 
-**Status** — `[ ] pending`
+**Status** — `[x] completed`
 
 ---
 
