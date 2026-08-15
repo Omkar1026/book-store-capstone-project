@@ -481,7 +481,7 @@ Build all reusable presentational components so that every feature page assemble
 - `BookCardComponent` input: `book: BookSummary`; output: `addToCart: EventEmitter<Book>`
 - `ModalComponent` uses `ng-content` projection for body and footer slots
 
-**Status** — `[ ] pending`
+**Status** — `[x] complete`
 
 ---
 
