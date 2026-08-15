@@ -583,7 +583,7 @@ Implement the full catalogue browsing experience: grid view with filter sidebar,
 
 ---
 
-### Sub-Task 9 — Product Detail Page
+### Sub-Task 9 — Product Detail Page ✅
 
 **Intent**  
 Build the individual product page showing full book details, computed delivery date, customer reviews, and a related books carousel. This is where the purchase decision is made.
@@ -612,7 +612,7 @@ Build the individual product page showing full book details, computed delivery d
 - `delivery.service.ts` — pure date calculation, no HTTP needed
 - `cart.store.ts` — addItem method
 
-**Status** — `[ ] pending`
+**Status** — `[x] completed`
 
 ---
 

@@ -1,24 +1,27 @@
-import express from 'express';
-import cors from 'cors';
 import jsonServer from 'json-server';
+import cors from 'cors';
 import path from 'path';
+import { Request, Response, NextFunction } from 'express';
 
-const app = express();
 const PORT = 3000;
 
-// ── Middleware ──────────────────────────────────────────────────────────────
-app.use(cors());
-app.use(express.json());
+// json-server.create() is required — plain express() breaks the lowdb router context
+const app = jsonServer.create();
 
-// Initialize json-server router first so we can use its lowdb instance
+// Initialize router and db
 const router = jsonServer.router(path.join(__dirname, 'db.json'));
 const db = (router as any).db;
 const middlewares = jsonServer.defaults({ logger: false });
 
+// ── Middleware ──────────────────────────────────────────────────────────────
+app.use(cors());
+app.use(jsonServer.bodyParser);
+app.use(middlewares);
+
 // ── Custom routes (must come BEFORE json-server router middleware) ─────────
 
 // Auth — login
-app.post('/auth/login', (req, res) => {
+app.post('/auth/login', (req: Request, res: Response) => {
   const users: any[] = db.get('users').value() || [];
   const { email, password } = req.body;
   const user = users.find((u: any) => u.email === email && u.password === password);
@@ -30,7 +33,7 @@ app.post('/auth/login', (req, res) => {
 });
 
 // Auth — register
-app.post('/auth/register', (req, res) => {
+app.post('/auth/register', (req: Request, res: Response) => {
   const { email, password, name } = req.body;
   if (!email || !password || !name) {
     return res.status(400).json({ message: 'Email, password, and name are required' });
@@ -56,7 +59,7 @@ app.post('/auth/register', (req, res) => {
 });
 
 // Payment — simulate (1.5 s delay, always success)
-const handlePayment = (_req: express.Request, res: express.Response) => {
+const handlePayment = (_req: Request, res: Response) => {
   setTimeout(() => {
     res.json({ success: true, transactionId: `txn-${Date.now()}` });
   }, 1500);
@@ -65,7 +68,7 @@ app.post('/payments', handlePayment);
 app.post('/payments/initiate', handlePayment);
 
 // Gift-points — redeem
-app.post('/gift-points/redeem', (req, res) => {
+app.post('/gift-points/redeem', (req: Request, res: Response) => {
   const { userId, amount } = req.body;
   if (!userId || typeof amount !== 'number') {
     return res.status(400).json({ message: 'userId and amount (number) are required' });
@@ -77,24 +80,24 @@ app.post('/gift-points/redeem', (req, res) => {
   if (user.giftPointsBalance < amount) {
     return res.status(400).json({ message: 'Insufficient points balance' });
   }
-  
+
   // Update in user table
   user.giftPointsBalance -= amount;
-  
+
   // Also update in separate giftPointsBalances table if exists
   const gpBalance = db.get('giftPointsBalances').find({ userId }).value();
   if (gpBalance) {
     gpBalance.balance = user.giftPointsBalance;
     gpBalance.updatedAt = new Date().toISOString();
   }
-  
+
   db.write(); // persists changes to db.json
   return res.json({ success: true, newBalance: user.giftPointsBalance });
 });
 
 // Delivery date estimation
-app.get('/delivery/estimate', (req, res) => {
-  const stock = parseInt(req.query.stock as string, 10);
+app.get('/delivery/estimate', (req: Request, res: Response) => {
+  const stock = parseInt(req.query['stock'] as string, 10);
   const days = isNaN(stock) || stock > 0
     ? (Math.floor(Math.random() * 2) + 2) // 2-3 days
     : (Math.floor(Math.random() * 3) + 7); // 7-9 days
@@ -102,13 +105,12 @@ app.get('/delivery/estimate', (req, res) => {
   deliveryDate.setDate(deliveryDate.getDate() + days);
   res.json({
     estimatedDate: deliveryDate.toISOString(),
-    estimatedDelivery: deliveryDate.toISOString(), // fallback
+    estimatedDelivery: deliveryDate.toISOString(),
     days
   });
 });
 
 // ── json-server router (standard CRUD for all resources) ───────────────────
-app.use(middlewares);
 app.use(router);
 
 // ── Start ───────────────────────────────────────────────────────────────────

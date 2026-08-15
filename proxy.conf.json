@@ -2,9 +2,22 @@
   "/api": {
     "target": "http://localhost:3000",
     "secure": false,
-    "pathRewrite": {
-      "^/api": ""
-    },
-    "changeOrigin": true
+    "pathRewrite": { "^/api": "" }
+  },
+  "/auth": {
+    "target": "http://localhost:3000",
+    "secure": false
+  },
+  "/payments": {
+    "target": "http://localhost:3000",
+    "secure": false
+  },
+  "/gift-points": {
+    "target": "http://localhost:3000",
+    "secure": false
+  },
+  "/delivery": {
+    "target": "http://localhost:3000",
+    "secure": false
   }
 }
