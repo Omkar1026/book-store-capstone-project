@@ -675,7 +675,7 @@ Implement the full three-step checkout: delivery address selection/entry, paymen
 - `order.store.ts` — placeOrder method
 - Payment is fully mocked — simulate 1.5s network delay then success
 
-**Status** — `[ ] pending`
+**Status** — `[x] completed`
 
 ---
 
