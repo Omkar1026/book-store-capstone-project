@@ -1,5 +1,7 @@
 # IBM AI Specialist Capstone — Online Bookstore Architecture Plan
 
+> **Plan file location:** `bookstore/spec/bookstore-capstone-plan.md`
+
 ## Top-Level Overview
 
 Build a responsive Angular 18+ online bookstore e-commerce application covering every customer journey listed in the capstone brief.
@@ -745,16 +747,87 @@ Ensure the application is fully responsive across mobile, tablet, and desktop br
 
 ---
 
+### Sub-Task 14 — Unit Tests
+
+**Intent**
+Write unit tests for every piece of logic in the application. Tests cover correctness of business rules, state transitions, HTTP interactions, routing guards, and pipe transformations. HTML templates and model/interface files are explicitly excluded — only TypeScript logic files get specs.
+
+**Scope — What Gets Tested**
+
+| Category | Files | What to test |
+|---|---|---|
+| **Services** | `auth.service.ts`, `book.service.ts`, `cart.service.ts`, `order.service.ts`, `payment.service.ts`, `recommendation.service.ts`, `address.service.ts`, `gift-points.service.ts`, `category.service.ts`, `publisher.service.ts`, `delivery.service.ts`, `toast.service.ts` | Correct HTTP method + URL called; query params built correctly; localStorage read/write for auth; mock delay behaviour for payment; pure date calculation for delivery |
+| **NgRx Signal Stores** | `auth.store.ts`, `cart.store.ts`, `catalogue.store.ts`, `order.store.ts`, `recommendation.store.ts`, `gift-points.store.ts`, `checkout.store.ts`, `toast.store.ts` | Initial state shape; computed signal values (itemCount, totalPrice, isAuthenticated); state transitions after each method call; loading/error flags set and cleared correctly |
+| **Guards** | `auth.guard.ts`, `guest.guard.ts` | Authenticated user passes AuthGuard; unauthenticated user is redirected to `/auth/login` with `returnUrl`; authenticated user is redirected away from `/auth/*` by GuestGuard |
+| **Interceptors** | `auth.interceptor.ts`, `error.interceptor.ts` | JWT header is attached when token exists; no header added when no token; 401/403/500 responses trigger toast; request passes through on 2xx |
+| **Pipes** | `truncate.pipe.ts`, `currency-format.pipe.ts`, `time-ago.pipe.ts` | Truncation at boundary; currency symbol and decimal formatting; relative time strings (just now, X mins ago, X days ago) |
+| **Validators** | Custom `passwordMatchValidator`, gift-points amount validator, card number validator | Valid inputs pass; each invalid case returns the correct error key |
+| **Page Components (logic only)** | All page components (`login-page`, `register-page`, `home-page`, `catalogue-page`, `product-detail-page`, `cart-page`, `checkout-*-page`, `order-history-page`, `order-detail-page`, `profile-page`) | Component initialises and injects the correct stores; `ngOnInit` triggers the expected store method; form submission dispatches the correct store action; cancel-within-48h visibility logic; buy-again iterates items and calls addItem; redirect-after-login uses returnUrl |
+| **Domain Components (logic only)** | `BookCardComponent`, `CartItemComponent`, `GiftPointsRedeemComponent`, `PaymentMethodSelectorComponent`, `CancelOrderDialogComponent`, `OrderSummaryComponent` | Output events emitted on user interaction; quantity clamping logic; gift-points validation (amount ≤ balance); payment method selection state |
+
+**Scope — What is NOT Tested**
+- `*.model.ts` / `*.interface.ts` files — pure type declarations, no runtime logic
+- `*.component.html` templates — no DOM/template tests
+- `*.component.css` / `*.scss` — no style tests
+- `app.config.ts`, `app.routes.ts` — bootstrapping config, not logic
+- `environment.ts` / `environment.prod.ts` — constants only
+- `server/index.ts` — Express server is backend code, tested manually via API calls during Sub-Task 3
+- `scripts/seed-db.ts` — data generation script, not application logic
+
+**Testing Tools & Configuration**
+- **Test runner:** Jasmine + Karma (Angular default, already configured by `ng new`)
+- **HTTP mocking:** `HttpClientTestingModule` + `HttpTestingController` for all service specs
+- **Store testing:** instantiate the signal store with `TestBed`, call methods, assert signal values
+- **Guard testing:** use `RouterTestingHarness` or mock `ActivatedRouteSnapshot` + `RouterStateSnapshot`
+- **Component testing:** `TestBed.createComponent()` with store and service spies injected; assert component properties and emitted outputs — no template assertions
+- One `.spec.ts` file per source `.ts` file being tested, co-located alongside the source file
+
+**Expected Outcomes**
+- Every service has a `.spec.ts` covering happy path and at least one error/edge case per method
+- Every store has a `.spec.ts` covering: initial state, each method's state mutation, each computed signal, loading/error flag lifecycle
+- Every guard has a `.spec.ts` with both the allow and redirect scenarios
+- Every interceptor has a `.spec.ts` with token-present and token-absent cases, and error response handling
+- Every pipe has a `.spec.ts` covering boundary values and edge cases
+- Every custom validator function has a `.spec.ts` covering valid and each invalid case
+- Every page component has a `.spec.ts` covering `ngOnInit` store dispatch and key logic methods
+- `ng test --no-progress --browsers=ChromeHeadless` passes with zero failures
+
+**Todo List**
+1. Verify Karma + Jasmine config in `angular.json` and `karma.conf.js`; confirm `ChromeHeadless` is set as default browser for CI
+2. Write specs for all 12 services — use `HttpClientTestingModule` and `HttpTestingController`; verify URL, method, and query params for each service method
+3. Write specs for all 8 NgRx Signal Stores — instantiate via `TestBed`, test initial state, each state-mutating method, and all computed signals
+4. Write specs for `auth.guard.ts` and `guest.guard.ts` — mock `AuthStore.isAuthenticated` signal, assert `UrlTree` redirect vs `true`
+5. Write specs for `auth.interceptor.ts` and `error.interceptor.ts` — use `HttpClientTestingModule`, assert request headers modified and toast triggered on error
+6. Write specs for `TruncatePipe`, `CurrencyFormatPipe`, `TimeAgoPipe` — instantiate pipe class directly, no `TestBed` needed
+7. Write specs for custom validators (`passwordMatchValidator`, gift-points validator, card validator) — call validator function directly with `AbstractControl` mocks
+8. Write specs for all page components — use `TestBed.createComponent()`, provide mock store/service spies, test `ngOnInit` and key logic methods only (no template assertions)
+9. Write specs for logic-bearing domain components (`BookCardComponent`, `CartItemComponent`, `GiftPointsRedeemComponent`, `PaymentMethodSelectorComponent`, `CancelOrderDialogComponent`) — test `@Output` emissions and validation logic
+10. Run `ng test --no-progress --browsers=ChromeHeadless` and fix any failures
+11. Confirm all spec files are co-located with their source file (e.g. `auth.service.spec.ts` next to `auth.service.ts`)
+
+**Relevant Context**
+- Angular testing guide: `TestBed`, `HttpClientTestingModule`, `RouterTestingModule`
+- NgRx Signal Store testing: provide store in `TestBed.configureTestingModule({ providers: [MyStore] })`, then inject and call methods
+- Cancel-within-48h logic is pure TypeScript — test it as a standalone utility function extracted to `src/app/core/utils/order.utils.ts` so it can be unit-tested without a component
+- The `delivery.service.ts` date calculation should also be extracted to `src/app/core/utils/delivery-date.util.ts` if not already — makes it trivially testable
+
+**Status** — `[ ] pending`
+
+---
+
 ## Dependency Order for Implementation
 
 ```
-Sub-Task 1 (Scaffold)
-  → Sub-Task 2 (Models + Mock Data)
-    → Sub-Task 3 (Services)
+Sub-Task 1 (Scaffold) ✅
+  → Sub-Task 2 (Models + Mock Data) ✅
+    → Sub-Task 3 (Services) ✅
       → Sub-Task 4 (Signal Stores)
         → Sub-Task 5 (Shared Components)
           → Sub-Tasks 6–12 (Feature Pages, in parallel after Sub-Task 5)
             → Sub-Task 13 (Responsive Polish)
+              → Sub-Task 14 (Unit Tests)
 ```
 
 Sub-Tasks 6 through 12 are largely independent of each other once Sub-Tasks 1–5 are complete and can be implemented in any order.
+
+**Unit-testing note:** Sub-Task 14 is sequenced after all features are built so specs can be written against finalised implementations. However, specs for Sub-Tasks 3–5 (services, stores, pipes) can be written incrementally as each sub-task completes — the todo list in Sub-Task 14 groups them for clarity but they do not all need to wait.
