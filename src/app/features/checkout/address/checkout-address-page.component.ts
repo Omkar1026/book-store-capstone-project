@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 import { AuthStore } from '../../../core/store/auth.store';
 import { CheckoutStore } from '../../../core/store/checkout.store';
@@ -182,6 +183,7 @@ export class CheckoutAddressPageComponent implements OnInit {
   private readonly checkoutStore = inject(CheckoutStore);
   private readonly addressService = inject(AddressService);
   private readonly router = inject(Router);
+  private readonly title = inject(Title);
 
   readonly steps = CHECKOUT_STEPS;
   readonly addresses = signal<Address[]>([]);
@@ -202,6 +204,7 @@ export class CheckoutAddressPageComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.title.setTitle('Delivery Address — Checkout — BookStore');
     const user = this.authStore.currentUser();
     if (!user) return;
 

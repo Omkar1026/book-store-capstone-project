@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { CatalogueStore } from '../../../core/store/catalogue.store';
 import { CartStore } from '../../../core/store/cart.store';
@@ -136,6 +137,7 @@ export class CataloguePageComponent implements OnInit {
   private readonly publisherService = inject(PublisherService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly title = inject(Title);
 
   readonly filterCategories = signal<FilterCategory[]>([]);
   readonly filterPublishers = signal<FilterPublisher[]>([]);
@@ -150,6 +152,7 @@ export class CataloguePageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('Browse Books — BookStore');
     // Read query params and apply to store
     const params = this.route.snapshot.queryParamMap;
     const filter = {

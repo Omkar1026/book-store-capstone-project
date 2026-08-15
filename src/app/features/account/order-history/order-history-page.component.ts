@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { AuthStore } from '../../../core/store/auth.store';
 import { OrderStore } from '../../../core/store/order.store';
@@ -52,6 +53,7 @@ export class OrderHistoryPageComponent implements OnInit {
   readonly orderStore = inject(OrderStore);
   private readonly authStore = inject(AuthStore);
   readonly router = inject(Router);
+  private readonly title = inject(Title);
 
   sortedOrders() {
     return [...this.orderStore.orders()].sort(
@@ -60,6 +62,7 @@ export class OrderHistoryPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.title.setTitle('My Orders — BookStore');
     this.loadOrders();
   }
 

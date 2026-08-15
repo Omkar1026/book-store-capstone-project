@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router, ActivatedRoute, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 import { AuthStore } from '../../../core/store/auth.store';
 import { ButtonComponent } from '../../../shared/components/ui/button/button.component';
 import { InputComponent } from '../../../shared/components/ui/input/input.component';
@@ -87,6 +88,7 @@ export class LoginPageComponent implements OnInit {
   readonly authStore = inject(AuthStore);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly title = inject(Title);
 
   readonly form = new FormGroup<LoginForm>({
     email: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.email] }),
@@ -103,7 +105,9 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.title.setTitle('Sign In — BookStore');
+  }
 
   onSubmit(): void {
     if (this.form.invalid) {

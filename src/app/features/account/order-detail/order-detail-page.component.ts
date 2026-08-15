@@ -1,6 +1,7 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 import { OrderStore } from '../../../core/store/order.store';
 import { CartStore } from '../../../core/store/cart.store';
@@ -175,10 +176,12 @@ export class OrderDetailPageComponent implements OnInit {
   private readonly cartStore = inject(CartStore);
   readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  private readonly title = inject(Title);
 
   readonly showCancelDialog = signal(false);
 
   ngOnInit(): void {
+    this.title.setTitle('Order Details — BookStore');
     this.loadOrder();
   }
 

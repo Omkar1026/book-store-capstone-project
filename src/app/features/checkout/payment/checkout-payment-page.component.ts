@@ -1,6 +1,7 @@
 import { Component, computed, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 import { delay, of } from 'rxjs';
 
 import { AuthStore } from '../../../core/store/auth.store';
@@ -110,6 +111,7 @@ export class CheckoutPaymentPageComponent implements OnInit {
   readonly cartStore = inject(CartStore);
   readonly giftPointsStore = inject(GiftPointsStore);
   private readonly router = inject(Router);
+  private readonly title = inject(Title);
 
   readonly steps = CHECKOUT_STEPS;
   readonly paymentMethods = signal<PaymentMethod[]>(MOCK_PAYMENT_METHODS);
@@ -132,6 +134,7 @@ export class CheckoutPaymentPageComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.title.setTitle('Payment — Checkout — BookStore');
     // Redirect back if no address selected
     if (!this.checkoutStore.selectedAddress()) {
       this.router.navigate(['/checkout/address']);

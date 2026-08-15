@@ -27,13 +27,15 @@ import { CurrencyFormatPipe } from '../../../pipes/currency-format.pipe';
           <button
             (click)="decrement()"
             [disabled]="item().quantity <= 1"
+            aria-label="Decrease quantity"
             class="w-7 h-7 rounded-full border border-gray-300 text-gray-600 flex items-center justify-center hover:bg-gray-50 disabled:opacity-40">
             −
           </button>
-          <span class="w-6 text-center text-sm font-medium">{{ item().quantity }}</span>
+          <span class="w-6 text-center text-sm font-medium" aria-live="polite">{{ item().quantity }}</span>
           <button
             (click)="increment()"
             [disabled]="item().quantity >= item().stock"
+            aria-label="Increase quantity"
             class="w-7 h-7 rounded-full border border-gray-300 text-gray-600 flex items-center justify-center hover:bg-gray-50 disabled:opacity-40">
             +
           </button>
@@ -47,7 +49,8 @@ import { CurrencyFormatPipe } from '../../../pipes/currency-format.pipe';
         </span>
         <button
           (click)="remove.emit(item().bookId)"
-          class="text-xs text-red-500 hover:text-red-700 transition-colors">
+          class="text-xs text-red-500 hover:text-red-700 transition-colors"
+          [attr.aria-label]="'Remove ' + item().title + ' from cart'">
           Remove
         </button>
       </div>

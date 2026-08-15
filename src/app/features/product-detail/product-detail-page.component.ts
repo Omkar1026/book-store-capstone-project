@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Title } from '@angular/platform-browser';
 
 import { CartStore } from '../../core/store/cart.store';
 import { ToastStore } from '../../core/store/toast.store';
@@ -204,6 +205,7 @@ export class ProductDetailPageComponent implements OnInit {
   private readonly cartStore = inject(CartStore);
   private readonly toastStore = inject(ToastStore);
   private readonly http = inject(HttpClient);
+  private readonly titleService = inject(Title);
 
   readonly book = signal<Book | null>(null);
   readonly category = signal<BookCategory | null>(null);
@@ -233,6 +235,7 @@ export class ProductDetailPageComponent implements OnInit {
       next: book => {
         this.book.set(book);
         this.isLoading.set(false);
+        this.titleService.setTitle(`${book.title} — BookStore`);
         this.loadCategory(book);
         this.loadPublisher(book.publisherId);
         this.loadRelatedBooks(book.categoryId, book.id);

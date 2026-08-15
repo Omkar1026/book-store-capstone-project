@@ -1,4 +1,4 @@
-import { Component, input, output } from '@angular/core';
+import { Component, input, output, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -24,7 +24,31 @@ export interface FilterPublisher {
   standalone: true,
   imports: [CommonModule, FormsModule],
   template: `
-    <aside class="w-64 shrink-0 space-y-6">
+    <!-- Mobile: filter toggle button -->
+    <div class="lg:hidden mb-4">
+      <button
+        type="button"
+        (click)="drawerOpen.set(!drawerOpen())"
+        class="flex items-center gap-2 border border-gray-300 rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        [attr.aria-expanded]="drawerOpen()"
+        aria-label="Toggle filters">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L13 13.414V19a1 1 0 01-.553.894l-4 2A1 1 0 017 21v-7.586L3.293 6.707A1 1 0 013 6V4z" />
+        </svg>
+        Filters
+        @if (drawerOpen()) {
+          <span class="ml-auto text-xs text-gray-500">▲</span>
+        } @else {
+          <span class="ml-auto text-xs text-gray-500">▼</span>
+        }
+      </button>
+    </div>
+
+    <!-- Filter panel — always visible lg+, toggled on mobile -->
+    <aside
+      [class.hidden]="!drawerOpen()"
+      class="lg:block w-full lg:w-64 lg:shrink-0 space-y-6">
 
       <!-- Category filter -->
       <div>
@@ -60,13 +84,15 @@ export interface FilterPublisher {
           <input
             type="number"
             placeholder="Min"
+            aria-label="Minimum price"
             [(ngModel)]="minPrice"
             class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-400"
           />
-          <span class="text-gray-400">–</span>
+          <span class="text-gray-400" aria-hidden="true">–</span>
           <input
             type="number"
             placeholder="Max"
+            aria-label="Maximum price"
             [(ngModel)]="maxPrice"
             class="w-full border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-indigo-400"
           />
@@ -123,6 +149,8 @@ export class SidebarFilterComponent {
   readonly selectedPublisherId = input<string | null>(null);
 
   readonly filterChange = output<FilterState>();
+
+  readonly drawerOpen = signal(false);
 
   minPrice: number | null = null;
   maxPrice: number | null = null;

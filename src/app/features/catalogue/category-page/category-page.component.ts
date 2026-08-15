@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { CatalogueStore } from '../../../core/store/catalogue.store';
 import { CartStore } from '../../../core/store/cart.store';
@@ -133,6 +134,7 @@ export class CategoryPageComponent implements OnInit {
   private readonly publisherService = inject(PublisherService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly title = inject(Title);
 
   readonly filterCategories = signal<FilterCategory[]>([]);
   readonly filterPublishers = signal<FilterPublisher[]>([]);
@@ -158,6 +160,7 @@ export class CategoryPageComponent implements OnInit {
         const match = cats.find(c => c.slug === slug);
         if (match) {
           this.categoryName.set(match.name);
+          this.title.setTitle(`${match.name} Books — BookStore`);
           this.catalogueStore.setFilter({ categoryId: match.id });
           this.catalogueStore.setSort('relevance');
           this.catalogueStore.setPage(1);

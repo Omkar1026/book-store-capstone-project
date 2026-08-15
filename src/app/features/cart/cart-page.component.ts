@@ -1,5 +1,6 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { CartStore } from '../../core/store/cart.store';
 
@@ -76,6 +77,7 @@ import { SpinnerComponent } from '../../shared/components/ui/spinner/spinner.com
 export class CartPageComponent implements OnInit {
   readonly cartStore = inject(CartStore);
   private readonly router = inject(Router);
+  private readonly title = inject(Title);
 
   readonly orderSummary = computed<OrderSummaryData>(() => {
     const subtotal = this.cartStore.totalPrice();
@@ -88,7 +90,9 @@ export class CartPageComponent implements OnInit {
     };
   });
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.title.setTitle('Shopping Cart — BookStore');
+  }
 
   onQtyChange(event: { bookId: string; quantity: number }): void {
     this.cartStore.updateQty(event.bookId, event.quantity);

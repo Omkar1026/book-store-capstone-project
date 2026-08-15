@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { AuthStore } from '../../core/store/auth.store';
 import { RecommendationStore } from '../../core/store/recommendation.store';
@@ -165,6 +166,7 @@ export class HomePageComponent implements OnInit {
   private readonly bookService = inject(BookService);
   private readonly categoryService = inject(CategoryService);
   private readonly publisherService = inject(PublisherService);
+  private readonly title = inject(Title);
 
   // ── Trending books local state ──────────────────────────────────────────
   readonly trendingBooks = signal<Book[]>([]);
@@ -208,6 +210,7 @@ export class HomePageComponent implements OnInit {
   );
 
   ngOnInit(): void {
+    this.title.setTitle('BookStore — Your Next Great Read Awaits');
     this.loadTrending();
     this.loadCategories();
     this.loadPublishers();

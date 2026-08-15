@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-not-found-page',
+  standalone: true,
   template: `
     <div class="flex flex-col items-center justify-center min-h-screen gap-4">
       <h1 class="text-4xl font-bold">404</h1>
@@ -10,4 +12,10 @@ import { Component } from '@angular/core';
     </div>
   `
 })
-export class NotFoundPageComponent {}
+export class NotFoundPageComponent implements OnInit {
+  private readonly title = inject(Title);
+
+  ngOnInit(): void {
+    this.title.setTitle('Page Not Found — BookStore');
+  }
+}

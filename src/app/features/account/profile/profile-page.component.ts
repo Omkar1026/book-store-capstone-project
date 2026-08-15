@@ -1,5 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 
 import { AuthStore } from '../../../core/store/auth.store';
 import { AuthService } from '../../../core/services/auth.service';
@@ -66,6 +67,7 @@ import { ButtonComponent } from '../../../shared/components/ui/button/button.com
 export class ProfilePageComponent implements OnInit {
   private readonly authStore = inject(AuthStore);
   private readonly authService = inject(AuthService);
+  private readonly title = inject(Title);
 
   readonly saving = signal(false);
   readonly successMessage = signal('');
@@ -77,6 +79,7 @@ export class ProfilePageComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.title.setTitle('My Profile — BookStore');
     const user = this.authStore.currentUser();
     if (user) {
       this.form.patchValue({ name: user.name, email: user.email });

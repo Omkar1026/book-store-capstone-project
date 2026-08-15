@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 import { AuthStore } from '../../../core/store/auth.store';
 import { ButtonComponent } from '../../../shared/components/ui/button/button.component';
 import { InputComponent } from '../../../shared/components/ui/input/input.component';
@@ -126,6 +127,7 @@ function passwordMatchValidator(group: AbstractControl): ValidationErrors | null
 export class RegisterPageComponent implements OnInit {
   readonly authStore = inject(AuthStore);
   private readonly router = inject(Router);
+  private readonly title = inject(Title);
 
   readonly form = new FormGroup<RegisterForm>(
     {
@@ -146,7 +148,9 @@ export class RegisterPageComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.title.setTitle('Create Account — BookStore');
+  }
 
   onSubmit(): void {
     if (this.form.invalid) {

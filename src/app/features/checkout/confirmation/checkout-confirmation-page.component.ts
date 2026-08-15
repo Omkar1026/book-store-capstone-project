@@ -1,6 +1,7 @@
 import { Component, computed, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 
 import { AuthStore } from '../../../core/store/auth.store';
 import { CheckoutStore } from '../../../core/store/checkout.store';
@@ -138,11 +139,13 @@ export class CheckoutConfirmationPageComponent implements OnInit {
   readonly orderStore = inject(OrderStore);
   private readonly giftPointsStore = inject(GiftPointsStore);
   private readonly router = inject(Router);
+  private readonly title = inject(Title);
 
   readonly steps = CHECKOUT_STEPS;
   readonly orderError = computed(() => this.orderStore.error());
 
   ngOnInit(): void {
+    this.title.setTitle('Order Confirmed — BookStore');
     const address = this.checkoutStore.selectedAddress();
     const paymentMethod = this.checkoutStore.paymentMethod();
     const user = this.authStore.currentUser();

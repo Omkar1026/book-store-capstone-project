@@ -1,6 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 import { CatalogueStore } from '../../../core/store/catalogue.store';
 import { CartStore } from '../../../core/store/cart.store';
@@ -133,6 +134,7 @@ export class PublisherPageComponent implements OnInit {
   private readonly publisherService = inject(PublisherService);
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly title = inject(Title);
 
   readonly filterCategories = signal<FilterCategory[]>([]);
   readonly filterPublishers = signal<FilterPublisher[]>([]);
@@ -153,6 +155,7 @@ export class PublisherPageComponent implements OnInit {
     this.publisherService.getPublisherById(publisherId).subscribe({
       next: pub => {
         this.publisherName.set(pub.name);
+        this.title.setTitle(`${pub.name} — BookStore`);
       },
       error: () => {}
     });
