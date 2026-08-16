@@ -77,6 +77,29 @@
           },
           "defaultConfiguration": "production"
         },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "polyfills": ["zone.js", "zone.js/testing"],
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "karmaConfig": "karma.conf.js",
+            "codeCoverage": false
+          },
+          "configurations": {
+            "coverage": {
+              "codeCoverage": true
+            }
+          }
+        },
         "serve": {
           "builder": "@angular/build:dev-server",
           "options": {

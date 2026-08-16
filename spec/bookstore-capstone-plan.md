@@ -811,7 +811,7 @@ Write unit tests for every piece of logic in the application. Tests cover correc
 - Cancel-within-48h logic is pure TypeScript — test it as a standalone utility function extracted to `src/app/core/utils/order.utils.ts` so it can be unit-tested without a component
 - The `delivery.service.ts` date calculation should also be extracted to `src/app/core/utils/delivery-date.util.ts` if not already — makes it trivially testable
 
-**Status** — `[ ] pending`
+**Status** — `[x] completed`
 
 ---
 
