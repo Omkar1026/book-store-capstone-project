@@ -64,14 +64,14 @@ interface LoginForm {
           }
 
           <!-- Submit -->
-          <app-button
-            type="submit"
-            [loading]="authStore.isLoading()"
-            [disabled]="form.invalid"
-            size="lg"
-            class="w-full block">
-            <span class="w-full text-center">Sign In</span>
-          </app-button>
+          <div class="pt-3">
+            <app-button
+              type="submit"
+              [loading]="authStore.isLoading()"
+              [disabled]="form.invalid">
+              Sign In
+            </app-button>
+          </div>
 
         </form>
 

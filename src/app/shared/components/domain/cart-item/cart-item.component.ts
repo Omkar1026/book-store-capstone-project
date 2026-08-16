@@ -34,7 +34,7 @@ import { CurrencyFormatPipe } from '../../../pipes/currency-format.pipe';
           <span class="w-6 text-center text-sm font-medium" aria-live="polite">{{ item().quantity }}</span>
           <button
             (click)="increment()"
-            [disabled]="item().quantity >= item().stock"
+            [disabled]="item().stock > 0 && item().quantity >= item().stock"
             aria-label="Increase quantity"
             class="w-7 h-7 rounded-full border border-gray-300 text-gray-600 flex items-center justify-center hover:bg-gray-50 disabled:opacity-40">
             +

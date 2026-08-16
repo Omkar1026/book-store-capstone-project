@@ -1002,36 +1002,8 @@
     {
       "id": "cart-1786813447270",
       "userId": "user-1786813299074",
-      "items": [
-        {
-          "bookId": "book-004",
-          "title": "Project Hail Mary",
-          "author": "Andy Weir",
-          "price": 16.99,
-          "quantity": 1,
-          "imageUrl": "https://placehold.co/200x300/f59e0b/fff?text=Book",
-          "stock": 0
-        },
-        {
-          "bookId": "book-016",
-          "title": "Becoming",
-          "author": "Michelle Obama",
-          "price": 17.99,
-          "quantity": 1,
-          "imageUrl": "https://placehold.co/200x300/0284c7/fff?text=Book",
-          "stock": 0
-        },
-        {
-          "bookId": "book-029",
-          "title": "The Diary of a Young Girl",
-          "author": "Anne Frank",
-          "price": 10.99,
-          "quantity": 1,
-          "imageUrl": "https://placehold.co/200x300/881337/fff?text=Book",
-          "stock": 0
-        }
-      ],
-      "updatedAt": "2026-08-16T07:34:58.879Z"
+      "items": [],
+      "updatedAt": "2026-08-16T15:48:27.908Z"
     }
   ],
   "orders": [
@@ -1547,6 +1519,72 @@
       "deliveryInfo": {
         "estimatedDate": "2026-08-21T07:14:01.320Z"
       }
+    },
+    {
+      "id": "order-1786893861384",
+      "userId": "user-1786813299074",
+      "items": [
+        {
+          "bookId": "book-001",
+          "title": "The Midnight Library",
+          "author": "Matt Haig",
+          "price": 14.99,
+          "imageUrl": "https://placehold.co/200x300/3b82f6/fff?text=Book",
+          "quantity": 1
+        }
+      ],
+      "status": "processing",
+      "placedAt": "2026-08-16T15:24:21.384Z",
+      "deliveryAddress": {
+        "id": "esGQC2A",
+        "userId": "user-1786813299074",
+        "name": "Omkar",
+        "line1": "123 Main st",
+        "city": "Mumbai",
+        "state": "Maharashtra",
+        "postcode": "400705",
+        "country": "India",
+        "isDefault": true
+      },
+      "paymentMethod": "paypal",
+      "giftPointsUsed": 0,
+      "totalAmount": 19.98,
+      "deliveryInfo": {
+        "estimatedDate": "2026-08-21T15:24:21.384Z"
+      }
+    },
+    {
+      "id": "order-1786895125765",
+      "userId": "user-1786813299074",
+      "items": [
+        {
+          "bookId": "book-001",
+          "title": "The Midnight Library",
+          "author": "Matt Haig",
+          "price": 14.99,
+          "imageUrl": "https://placehold.co/200x300/3b82f6/fff?text=Book",
+          "quantity": 1
+        }
+      ],
+      "status": "processing",
+      "placedAt": "2026-08-16T15:45:25.765Z",
+      "deliveryAddress": {
+        "id": "esGQC2A",
+        "userId": "user-1786813299074",
+        "name": "Omkar",
+        "line1": "123 Main st",
+        "city": "Mumbai",
+        "state": "Maharashtra",
+        "postcode": "400705",
+        "country": "India",
+        "isDefault": true
+      },
+      "paymentMethod": "credit_card",
+      "giftPointsUsed": 800,
+      "totalAmount": 11.98,
+      "deliveryInfo": {
+        "estimatedDate": "2026-08-21T15:45:25.764Z"
+      }
     }
   ],
   "addresses": [
@@ -1609,6 +1647,17 @@
       "postcode": "94102",
       "country": "USA",
       "isDefault": false
+    },
+    {
+      "id": "esGQC2A",
+      "userId": "user-1786813299074",
+      "name": "Omkar",
+      "line1": "123 Main st",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "postcode": "400705",
+      "country": "India",
+      "isDefault": true
     }
   ],
   "recommendations": [

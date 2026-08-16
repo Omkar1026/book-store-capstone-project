@@ -7,7 +7,7 @@ import { RegisterPageComponent } from './register-page.component';
 import { AuthStore } from '../../../core/store/auth.store';
 
 /** Builds a register form value for test fixtures. Avoids inline password literals. */
-function testRegForm(name: string, email: string, confirmMatches = true): Record<string, string> {
+function testRegForm(name: string, email: string, confirmMatches = true): { name: string; email: string; password: string; confirmPassword: string } {
   const obj: any = { name, email, confirmPassword: confirmMatches ? 'T3st-P@ss!' : 'wrong' };
   obj['password'] = 'T3st-P@ss!';
   return obj;

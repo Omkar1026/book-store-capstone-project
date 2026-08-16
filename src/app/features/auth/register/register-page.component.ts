@@ -104,14 +104,14 @@ function passwordMatchValidator(group: AbstractControl): ValidationErrors | null
           }
 
           <!-- Submit -->
-          <app-button
-            type="submit"
-            [loading]="authStore.isLoading()"
-            [disabled]="form.invalid"
-            size="lg"
-            class="w-full block">
-            <span class="w-full text-center">Create Account</span>
-          </app-button>
+          <div class="pt-3">
+            <app-button
+              type="submit"
+              [loading]="authStore.isLoading()"
+              [disabled]="form.invalid">
+              Create Account
+            </app-button>
+          </div>
 
         </form>
 

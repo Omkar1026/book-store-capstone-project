@@ -158,8 +158,9 @@ const CHECKOUT_STEPS: ProgressStep[] = [
 
             <button
               type="submit"
-              class="w-full bg-indigo-600 text-white font-semibold py-2.5 rounded-xl hover:bg-indigo-700 transition-colors text-sm">
-              Use this address
+              [disabled]="isSaving()"
+              class="w-full bg-indigo-600 text-white font-semibold py-2.5 rounded-xl hover:bg-indigo-700 transition-colors text-sm disabled:opacity-50 disabled:cursor-not-allowed">
+              {{ isSaving() ? 'Saving…' : 'Use this address' }}
             </button>
           </form>
         }
@@ -188,6 +189,7 @@ export class CheckoutAddressPageComponent implements OnInit {
   readonly steps = CHECKOUT_STEPS;
   readonly addresses = signal<Address[]>([]);
   readonly isLoading = signal(false);
+  readonly isSaving = signal(false);
   readonly showNewForm = signal(false);
   readonly selectedAddressId = signal<string | null>(
     this.checkoutStore.selectedAddress()?.id ?? null
@@ -240,7 +242,7 @@ export class CheckoutAddressPageComponent implements OnInit {
     if (!user) return;
     const v = this.form.getRawValue();
     const newAddress: Address = {
-      id: `addr-new-${Date.now()}`,
+      id: '',
       userId: user.id,
       name: v.name,
       line1: v.line1,
@@ -249,10 +251,18 @@ export class CheckoutAddressPageComponent implements OnInit {
       state: v.state,
       postcode: v.postcode,
       country: v.country,
-      isDefault: false
+      isDefault: this.addresses().length === 0
     };
-    this.checkoutStore.setAddress(newAddress);
-    this.router.navigate(['/checkout/payment']);
+    this.isSaving.set(true);
+    this.addressService.createAddress(newAddress).subscribe({
+      next: saved => {
+        this.addresses.update(list => [...list, saved]);
+        this.checkoutStore.setAddress(saved);
+        this.isSaving.set(false);
+        this.router.navigate(['/checkout/payment']);
+      },
+      error: () => this.isSaving.set(false)
+    });
   }
 
   onContinue(): void {

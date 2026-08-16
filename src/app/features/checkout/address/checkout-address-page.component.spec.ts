@@ -136,18 +136,47 @@ describe('CheckoutAddressPageComponent', () => {
     it('marks form touched and does nothing when form is invalid', () => {
       const fixture = TestBed.createComponent(CheckoutAddressPageComponent);
       fixture.componentInstance.onSubmitNew();
+      httpMock.expectNone('/api/addresses');
       expect(mockCheckoutStore.setAddress).not.toHaveBeenCalled();
     });
 
-    it('calls setAddress and navigates to payment when form is valid', () => {
+    it('POSTs to /api/addresses, calls setAddress with saved address and navigates to payment', () => {
       const fixture = TestBed.createComponent(CheckoutAddressPageComponent);
       const comp = fixture.componentInstance;
+      // Load addresses first so addresses().length === 0 (isDefault=true path)
+      comp.ngOnInit();
+      httpMock.expectOne('/api/addresses?userId=u1').flush([]);
+
       comp.form.setValue({ name: 'Jane', line1: '1 Main', line2: '', city: 'NY', state: 'NY', postcode: '10001', country: 'US' });
       const router = TestBed.inject(Router);
       spyOn(router, 'navigate');
+
       comp.onSubmitNew();
-      expect(mockCheckoutStore.setAddress).toHaveBeenCalled();
+
+      const req = httpMock.expectOne('/api/addresses');
+      expect(req.request.method).toBe('POST');
+      expect(req.request.body.name).toBe('Jane');
+      expect(req.request.body.isDefault).toBeTrue(); // first address → default
+
+      const savedAddress: Address = { ...req.request.body, id: 'addr-saved-1' };
+      req.flush(savedAddress);
+
+      expect(mockCheckoutStore.setAddress).toHaveBeenCalledWith(savedAddress);
       expect(router.navigate).toHaveBeenCalledWith(['/checkout/payment']);
+    });
+
+    it('sets isSaving back to false on API error', () => {
+      const fixture = TestBed.createComponent(CheckoutAddressPageComponent);
+      const comp = fixture.componentInstance;
+      comp.ngOnInit();
+      httpMock.expectOne('/api/addresses?userId=u1').flush([]);
+
+      comp.form.setValue({ name: 'Jane', line1: '1 Main', line2: '', city: 'NY', state: 'NY', postcode: '10001', country: 'US' });
+      comp.onSubmitNew();
+
+      httpMock.expectOne('/api/addresses').flush(null, { status: 500, statusText: 'Error' });
+      expect(comp.isSaving()).toBeFalse();
+      expect(mockCheckoutStore.setAddress).not.toHaveBeenCalled();
     });
 
     it('does nothing when user is null', () => {
@@ -156,6 +185,7 @@ describe('CheckoutAddressPageComponent', () => {
       const comp = fixture.componentInstance;
       comp.form.setValue({ name: 'Jane', line1: '1 Main', line2: '', city: 'NY', state: 'NY', postcode: '10001', country: 'US' });
       comp.onSubmitNew();
+      httpMock.expectNone('/api/addresses');
       expect(mockCheckoutStore.setAddress).not.toHaveBeenCalled();
     });
   });
