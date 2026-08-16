@@ -34,7 +34,7 @@ import { CurrencyFormatPipe } from '../../../pipes/currency-format.pipe';
 
         <app-star-rating [rating]="book().rating" [showCount]="false" class="mt-auto" />
 
-        <div class="flex items-center justify-between mt-1">
+        <div class="flex flex-wrap items-center justify-between gap-x-2 gap-y-1 mt-1">
           <span class="text-base font-bold text-gray-900">{{ book().price | currencyFormat }}</span>
           <app-button
             variant="primary"

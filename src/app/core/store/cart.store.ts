@@ -4,6 +4,7 @@ import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, switchMap, tap, catchError, EMPTY } from 'rxjs';
 import { patchState } from '@ngrx/signals';
 import { CartService } from '../services/cart.service';
+import { ToastStore } from './toast.store';
 import { Cart, CartItem } from '../models/cart.model';
 
 interface CartState {
@@ -31,7 +32,7 @@ export const CartStore = signalStore(
       (cart()?.items ?? []).reduce((sum, item) => sum + item.price * item.quantity, 0)
     )
   })),
-  withMethods((store, cartService = inject(CartService)) => ({
+  withMethods((store, cartService = inject(CartService), toastStore = inject(ToastStore)) => ({
     loadCart: rxMethod<string>(
       pipe(
         tap(() => patchState(store, { isLoading: true, error: null })),
@@ -84,6 +85,11 @@ export const CartStore = signalStore(
 
       const updatedCart: Cart = { ...current, items: updatedItems, updatedAt: new Date().toISOString() };
       patchState(store, { cart: updatedCart });
+
+      const msg = existing
+        ? `"${item.title}" quantity updated in cart`
+        : `"${item.title}" added to cart`;
+      toastStore.add({ type: 'success', message: msg });
 
       cartService.updateCart(current.id, { items: updatedItems, updatedAt: updatedCart.updatedAt }).pipe(
         catchError(() => EMPTY)

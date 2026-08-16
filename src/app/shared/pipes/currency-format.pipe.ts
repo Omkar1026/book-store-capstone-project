@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   standalone: true
 })
 export class CurrencyFormatPipe implements PipeTransform {
-  transform(value: number, currency: string = 'USD', locale: string = 'en-US'): string {
+  transform(value: number, currency: string = 'INR', locale: string = 'en-IN'): string {
     if (value == null || isNaN(value)) return '';
     return new Intl.NumberFormat(locale, {
       style: 'currency',

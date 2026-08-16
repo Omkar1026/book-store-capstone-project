@@ -2,10 +2,11 @@ import {
   Component,
   computed,
   inject,
+  OnDestroy,
   output,
   signal
 } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { BadgeComponent } from '../../ui/badge/badge.component';
 import { AuthStore } from '../../../../core/store/auth.store';
@@ -58,7 +59,30 @@ import { CartStore } from '../../../../core/store/cart.store';
             @if (isLoggedIn()) {
               <div class="hidden sm:flex items-center gap-2">
                 <span class="text-sm text-gray-700 hidden md:block">{{ userName() }}</span>
-                <a routerLink="/account/profile" class="text-sm text-gray-600 hover:text-indigo-600">Account</a>
+
+                <!-- Account dropdown -->
+                <div class="relative group">
+                  <button class="text-sm text-gray-600 hover:text-indigo-600 flex items-center gap-1">
+                    Account
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </button>
+                  <div class="absolute right-0 top-full mt-1 w-40 bg-white border border-gray-200 rounded-lg shadow-lg
+                              opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150 z-50">
+                    <a
+                      routerLink="/account/orders"
+                      class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-indigo-600 rounded-t-lg">
+                      My Orders
+                    </a>
+                    <a
+                      routerLink="/account/profile"
+                      class="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 hover:text-indigo-600 rounded-b-lg">
+                      Profile
+                    </a>
+                  </div>
+                </div>
+
                 <button
                   (click)="onLogout()"
                   aria-label="Log out"
@@ -163,9 +187,12 @@ import { CartStore } from '../../../../core/store/cart.store';
     </header>
   `
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnDestroy {
   private readonly authStore = inject(AuthStore);
   private readonly cartStore = inject(CartStore);
+  private readonly router = inject(Router);
+
+  private searchTimer: ReturnType<typeof setTimeout> | null = null;
 
   readonly logout = output<void>();
   readonly mobileMenuOpen = signal(false);
@@ -177,7 +204,18 @@ export class HeaderComponent {
   );
 
   onSearch(event: Event): void {
-    // Search handled by parent/router
+    const query = (event.target as HTMLInputElement).value.trim();
+    if (this.searchTimer) clearTimeout(this.searchTimer);
+    this.searchTimer = setTimeout(() => {
+      this.router.navigate(['/catalogue'], {
+        queryParams: { q: query || null },
+        queryParamsHandling: 'merge'
+      });
+    }, 300);
+  }
+
+  ngOnDestroy(): void {
+    if (this.searchTimer) clearTimeout(this.searchTimer);
   }
 
   onLogout(): void {

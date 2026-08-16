@@ -64,6 +64,15 @@ app.post('/auth/register', (req: Request, res: Response) => {
   };
   db.get('carts').push(newCart).write();
 
+  // Create a gift points balance entry for the new user
+  const newGiftPoints = {
+    id: `gpb-${Date.now()}`,
+    userId: newUser.id,
+    balance: 0,
+    updatedAt: new Date().toISOString()
+  };
+  db.get('giftPointsBalances').push(newGiftPoints).write();
+
   const { password: _pw, ...safeUser } = newUser;
   return res.json({ user: safeUser, token: `mock-jwt-${newUser.id}` });
 });

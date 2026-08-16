@@ -1,11 +1,12 @@
 import { Component, input, output } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CurrencyFormatPipe } from '../../../pipes/currency-format.pipe';
 
 @Component({
   selector: 'app-gift-points-redeem',
   standalone: true,
-  imports: [CommonModule, FormsModule, CurrencyPipe],
+  imports: [CommonModule, FormsModule, CurrencyFormatPipe],
   template: `
     <div class="bg-amber-50 border border-amber-200 rounded-xl p-4">
       <div class="flex items-center gap-2 mb-3">
@@ -33,7 +34,7 @@ import { FormsModule } from '@angular/forms';
         </div>
         @if (appliedPoints() > 0) {
           <div class="mt-2 flex items-center justify-between text-xs text-green-700">
-            <span>{{ appliedPoints() }} points applied ({{ appliedDiscount | currency:'USD' }} off)</span>
+            <span>{{ appliedPoints() }} points applied ({{ appliedDiscount | currencyFormat }} off)</span>
             <button (click)="redeem.emit(0)" class="text-red-500 hover:underline">Remove</button>
           </div>
         }

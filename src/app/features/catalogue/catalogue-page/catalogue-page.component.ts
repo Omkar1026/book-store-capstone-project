@@ -1,7 +1,8 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 
 import { CatalogueStore } from '../../../core/store/catalogue.store';
 import { CartStore } from '../../../core/store/cart.store';
@@ -130,7 +131,7 @@ import { ErrorStateComponent } from '../../../shared/components/ui/error-state/e
     </div>
   `
 })
-export class CataloguePageComponent implements OnInit {
+export class CataloguePageComponent implements OnInit, OnDestroy {
   readonly catalogueStore = inject(CatalogueStore);
   private readonly cartStore = inject(CartStore);
   private readonly categoryService = inject(CategoryService);
@@ -138,6 +139,8 @@ export class CataloguePageComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly title = inject(Title);
+
+  private paramsSub!: Subscription;
 
   readonly filterCategories = signal<FilterCategory[]>([]);
   readonly filterPublishers = signal<FilterPublisher[]>([]);
@@ -153,24 +156,28 @@ export class CataloguePageComponent implements OnInit {
 
   ngOnInit(): void {
     this.title.setTitle('Browse Books — BookStore');
-    // Read query params and apply to store
-    const params = this.route.snapshot.queryParamMap;
-    const filter = {
-      query: params.get('q') ?? undefined,
-      categoryId: params.get('categoryId') ?? undefined,
-      publisherId: params.get('publisherId') ?? undefined,
-      minPrice: params.get('minPrice') ? Number(params.get('minPrice')) : undefined,
-      maxPrice: params.get('maxPrice') ? Number(params.get('maxPrice')) : undefined
-    };
-    const sort = (params.get('sort') as SortOption) ?? 'relevance';
-    const page = params.get('page') ? Number(params.get('page')) : 1;
-
-    this.catalogueStore.setFilter(filter);
-    this.catalogueStore.setSort(sort);
-    this.catalogueStore.setPage(page);
-    this.catalogueStore.loadBooks();
-
     this.loadSidebarData();
+
+    this.paramsSub = this.route.queryParamMap.subscribe(params => {
+      const filter = {
+        query: params.get('q') ?? undefined,
+        categoryId: params.get('categoryId') ?? undefined,
+        publisherId: params.get('publisherId') ?? undefined,
+        minPrice: params.get('minPrice') ? Number(params.get('minPrice')) : undefined,
+        maxPrice: params.get('maxPrice') ? Number(params.get('maxPrice')) : undefined
+      };
+      const sort = (params.get('sort') as SortOption) ?? 'relevance';
+      const page = params.get('page') ? Number(params.get('page')) : 1;
+
+      this.catalogueStore.setFilter(filter);
+      this.catalogueStore.setSort(sort);
+      this.catalogueStore.setPage(page);
+      this.catalogueStore.loadBooks();
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.paramsSub?.unsubscribe();
   }
 
   onFilterChange(state: FilterState): void {
